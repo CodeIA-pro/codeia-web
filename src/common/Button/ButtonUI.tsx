@@ -1,0 +1,35 @@
+import { Box, Button, CircularProgress } from "@mui/material"
+
+interface ButtonUIProps {
+    text: string;
+    isLoading: boolean
+    onClick?: () => void;
+    className?: string;
+    style?: React.CSSProperties;
+}
+
+const ButtonUI: React.FC<ButtonUIProps> = ({text, isLoading, onClick, className, style}) => {
+
+    return(
+        <Button
+            className={`${className ? className || '' : ''} `} 
+            sx={{ borderColor: 'white', mt:1.5, mb:1, ...(style || {}), }}
+            onClick={onClick}
+            type="submit" 
+            variant="contained" 
+            disabled={isLoading}
+        >
+            <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {isLoading && (
+                    <CircularProgress 
+                        size={24} 
+                        sx={{ color: 'white', position: 'absolute' }}
+                    />
+                )}
+                <span style={{ visibility: isLoading ? 'hidden' : 'visible' }}>{text}</span>
+            </Box>
+        </Button>
+    )
+}
+
+export default ButtonUI;
