@@ -116,6 +116,10 @@ body {
       height: 400px;
     }
   }
+  
+  .btn-generate {
+    margin-right: 7.8em !important;
+  }
 
   @media (max-width: 1200px) {
     .card-container {
@@ -124,6 +128,9 @@ body {
     }
     .card-item {
       padding-top: 1em;
+    }
+    .btn-generate {
+      margin-right: 0 !important;
     }
   }
   

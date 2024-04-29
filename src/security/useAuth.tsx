@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { jwtDecode, JwtPayload } from "jwt-decode";
 import { useAuthStore } from '../store';
+import { jwtExpiration } from '../utils/auth';
 
 const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -11,10 +11,7 @@ const useAuth = () => {
     const token = user?.access;
     if (token) {
       try {
-        const decodedToken = jwtDecode<JwtPayload>(token || '');
-        const expirationTime = decodedToken?.exp ?? 0;
-        const isTokenExpired = expirationTime * 1000 < Date.now();
-        if (isTokenExpired) {
+        if (jwtExpiration(token)) {
           logout();
           setShouldRedirect(true);
         } else {

@@ -46,6 +46,19 @@ const theme = createTheme({
                 },
             },
         },
+        MuiTextField: {
+            styleOverrides: {
+              root: {
+                borderRadius: "0.7em",// Bordes redondeados para todos los TextField
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',  // Cambia el tamaño de la fuente del texto ingresado
+                },
+                '& .MuiInputLabel-root': {
+                  fontSize: '1rem',  // Tamaño de la fuente del label
+                },
+              },
+            },
+        },
         MuiToolbar: {
             defaultProps: {
                 style: {

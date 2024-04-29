@@ -13,7 +13,8 @@ const ButtonUI: React.FC<ButtonUIProps> = ({text, isLoading, onClick, className,
     return(
         <Button
             className={`${className ? className || '' : ''} `} 
-            sx={{ borderColor: 'white', mt:1.5, mb:1, ...(style || {}), }}
+            sx={{ backgroundColor:'#222f4e', borderColor: 'white', mt:1.5, mb:1, }}
+            style={{ ...(style || {}) }}
             onClick={onClick}
             type="submit" 
             variant="contained" 

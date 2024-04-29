@@ -10,8 +10,6 @@ export const Redirection: React.FC = () => {
         const redirectTimer = setTimeout(() => {
             if (user == null || user === undefined) {
                 navigate('/login');
-            } else if (user && user.repo_login) {
-                navigate('/select-repo');
             } else {
                 navigate('/connection');
             }

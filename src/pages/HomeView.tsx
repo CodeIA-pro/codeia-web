@@ -40,7 +40,7 @@ const HomeView: React.FC= () => {
       }}>
               <BasicFrame className='flex-col'>
                   <h1 style={{ color: 'white', textAlign: 'center', fontSize: '3em', margin: 0 }}>AI-Powered <span style={{color: '#649878'}}>DRF</span> Documentation<br/> Generation</h1>
-                  <h2 style={{ color: '#74767a', textAlign: 'center', fontSize: '0.9em', marginTop: 0 }}>Your ultimate guide to accelerating documentation creation</h2>
+                  <h2 style={{ color: '#74767a', textAlign: 'center', fontSize: '1.1em', marginTop: 0 }}>Your ultimate guide to accelerating documentation creation</h2>
                   <Button className={clicked ? 'buttonClicked' : ''} onClick={handleClick} sx={{ fontSize: '1em',fontWeight: 300, pr:'5em', pl:'5em', mt:'0.4em' }} variant="text"><span style={{zIndex:3}}>Begin your adventure</span></Button>
                   {clicked && <Redirection />}
               </BasicFrame>

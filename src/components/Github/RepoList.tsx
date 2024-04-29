@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Filtered, timeSince } from "../../utils/filtered";
 import TypographyFlow from "../../common/Typography/TypographyFlow";
@@ -10,6 +10,8 @@ import { Box, Button, Container, List, ListItem, ListItemIcon, Typography } from
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import LockIcon from '@mui/icons-material/Lock';
+import DialogRepo from './DialogRepo';
+import { GithubBranchContext } from '../../context/GithubBranch';
 
 interface RepoListProps {
   github: UserGithub;
@@ -18,10 +20,26 @@ interface RepoListProps {
 }
 
 const RepoList: React.FC<RepoListProps> = ({github, projects, name='' }) => {
-
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogData, setDialogData] = useState<ProjectGithub>();
   const filtered = Filtered(projects, 'name', name);
+  const { reset } = useContext(GithubBranchContext);
   const navigate = useNavigate();
   const navigateToInfo = (user: any, project: any) => navigate(`/info/${user}/${project}`);
+
+  const handleOpenDialog = (data: ProjectGithub) => {
+    reset();
+    setDialogData(data);
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleSaveDialog = (data: string) => {
+    console.log(data);
+  };
 
   return (
     <Fragment>
@@ -48,7 +66,7 @@ const RepoList: React.FC<RepoListProps> = ({github, projects, name='' }) => {
            </Button>
          ) 
          : (
-           <Button variant="contained" style={{fontSize: '0.7em',  borderRadius: '0.7em', width: '82px' , textTransform: 'none', backgroundColor:'#1e2f50' }}>
+           <Button variant="contained" onClick={() => handleOpenDialog(project)} style={{fontSize: '0.7em',  borderRadius: '0.7em', width: '82px' , textTransform: 'none', backgroundColor:'#1e2f50' }}>
                Connect
            </Button>
          ) 
@@ -60,7 +78,16 @@ const RepoList: React.FC<RepoListProps> = ({github, projects, name='' }) => {
     <BasicFrame className='w-full h-full'>
         <Typography>No projects found</Typography>
     </BasicFrame>)}
-    </Fragment>);
+    {dialogData !== null && (
+            <DialogRepo
+                open={openDialog}
+                onClose={handleCloseDialog}
+                onSave={handleSaveDialog}
+                initialData={dialogData as ProjectGithub}
+            />
+        )}
+  </Fragment>
+  );
 }
 
 export default RepoList;

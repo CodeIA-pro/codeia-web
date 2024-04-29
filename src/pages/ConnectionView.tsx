@@ -59,6 +59,12 @@ const ConnectionView: React.FC = () => {
                 disabled={!selected}
                 variant="contained"
                 onClick={()=> {loginWithGithub(); handleClick();}}
+                sx={{
+                    opacity: !selected ? 0.5 : 1, // Reduce la opacidad cuando no está seleccionado
+                    '&:disabled': {
+                    backgroundColor: 'grey', // Cambia el color de fondo cuando está deshabilitado
+                    },
+                }}
             >
                 <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {isLoading && (

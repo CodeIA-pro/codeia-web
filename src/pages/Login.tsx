@@ -7,13 +7,14 @@ import { useLogin } from "../queries/useAuth";
 import { LoginRequest } from "../interfaces/auth/auth.interface";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store";
+import Logo from '../../assets/logo.svg';
 import ButtonUI from "../common/Button/ButtonUI";
 
 const LoginView: React.FC = () => {
-  const navigate = useNavigate()
   const { isLoading, mutate } = useLogin();
-  const { user } = useAuthStore();
   const { register, handleSubmit, formState: { errors } } = useForm<LoginRequest>();
+  const { user } = useAuthStore();
+  const navigate = useNavigate()
   
   useEffect(() => {
       if (user) navigate('/projects');
@@ -26,11 +27,12 @@ const LoginView: React.FC = () => {
   return (
     <GenericFrame id="login" className="flex-col">
       <BasicFrame className="flex-col vs md:w-5/12 lg:w-3/12">
+        <img src={Logo} alt="logo" style={{ width: '100px', height: '100px', margin: 'auto' }}/>
         <Typography
           variant="h4"
           sx={{ mt: 1, mb: 1, fontSize: "1.7em", textAlign: "center" }}
         >
-          Iniciar sesión
+          Log In
         </Typography>
         <FormGroup className="w-full">
           <TextField
@@ -40,7 +42,7 @@ const LoginView: React.FC = () => {
             margin="normal"
             autoComplete="email"
             sx={{ mt: 1, mb: 1.5 }}
-            {...register("email", { required: "Este campo es obligatorio" })}
+            {...register("email", { required: "This field is required" })}
             error={!!errors.email}
             helperText={errors.email?.message}
           />
@@ -51,14 +53,16 @@ const LoginView: React.FC = () => {
             margin="normal"
             autoComplete="current-password"
             sx={{ mt: 1, mb: 1.5 }}
-            {...register("password", { required: "Este campo es obligatorio" })}
+            {...register("password", { required: "This field is required" })}
             error={!!errors.password}
             helperText={errors.password?.message}
           />
           <ButtonUI
-              text="Iniciar sesión"
+              text="Log In"
               isLoading={isLoading}
               onClick={handleSubmit(onSubmit)}/>
+          <Typography sx={{color: '#222f4e', mt: 1, textAlign: 'center', cursor:'pointer'}} 
+            onClick={() => navigate('/forgot-password')}>Forgot your password?</Typography>
         </FormGroup>
       </BasicFrame>
     </GenericFrame>
