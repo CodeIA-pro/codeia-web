@@ -21,13 +21,13 @@ export const useAuthStore = create(
       user: null,
       login: (userData, newRepoLoginValue) =>
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        set((state) => ({
+        set((_) => ({
           user: newRepoLoginValue
             ? updateUserRepoLogin(userData, newRepoLoginValue)
             : userData,
         })),
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      logout: () => set((state) => ({ user: null })),
+      logout: () => set((_) => ({ user: null })),
     }),
     {
       name: 'auth-store',
