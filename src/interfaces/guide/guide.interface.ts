@@ -8,6 +8,7 @@ export interface Guide {
     last_version:   string;
     assets:         Asset[];
     is_Loading:     boolean;
+    status:         string;
     message_failed: string;
     length:         number;
 }
@@ -22,10 +23,25 @@ export interface Asset {
     url:              string;
     is_father:        boolean;
     father_id:        number;
-    subsection:       string;
+    privacy:          string;
+    subsection:       Asset[];
     is_Loading:       boolean;
     to_failed:        boolean;
     message_failed:   string;
+    project_id:       number;
     url_commit:       string;
     short_sha:        string;
+    length:           number;
+}
+
+export interface Privacy {
+    project_id: number;
+    asset_id:   number;
+    privacy:    string;
+}
+
+export interface PrivacyResponse {
+    status: string;
+    link:   string;
+    privacy: string;
 }

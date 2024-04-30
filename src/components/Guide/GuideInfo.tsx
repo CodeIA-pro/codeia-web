@@ -11,6 +11,7 @@ import TypographyLongFlow from "../../common/Typography/TypographyLongFlow";
 interface GuideInfoProps {
     projects: Guide;
     updatedAt: number;
+    loading: boolean;
 }
   
 const GuideInfo: React.FC<GuideInfoProps> = ({projects, updatedAt}) => {
@@ -30,7 +31,7 @@ const GuideInfo: React.FC<GuideInfoProps> = ({projects, updatedAt}) => {
             <span style={{fontSize: '0.9em'}}>
                 {projects?.is_Loading ? (
                     <BasicFrame isCentered={false} className="items-center flex-row">
-                        Compiling  &nbsp; <LoopIcon style={{color:'#a5c96d', fontSize:'1.2em'}}/>
+                        Compiling  &nbsp; <LoopIcon style={{color:'#a5c96d', fontSize:'1.2em'}}/>  &nbsp; {projects?.status}
                     </BasicFrame>
                 ) : (
                     <BasicFrame>
@@ -47,7 +48,7 @@ const GuideInfo: React.FC<GuideInfoProps> = ({projects, updatedAt}) => {
                     </>
                 ) : (
                     <>
-                        {projects?.message_failed}&nbsp;<ErrorIcon style={{color:'#ff0000', fontSize:'1.2em'}}/>
+                        {<span className="text-wrap">{projects?.message_failed}&nbsp;<ErrorIcon style={{color:'#ff0000', fontSize:'1.2em'}}/></span>}
                     </>
                 )}
             </span>

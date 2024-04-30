@@ -6,6 +6,7 @@ import { Connect } from "../interfaces/github/connect.interface";
 import { useNotification } from "../hooks/useNotification";
 import { useGenerateGuide } from "../queries/useProject";
 import { GenerateReferenceGuide } from "../interfaces/project/projects.interface";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface GenerateGuideType {
     mutate: (data: GenerateReferenceGuide) => Promise<Connect>;
@@ -25,6 +26,7 @@ interface GenerateGuideProps {
     const [isLoading, setIsLoading] = useState(false);
     const {getSuccess, getWarning, getError} = useNotification();
     const {mutate: GenerateGuide} = useGenerateGuide();
+    const queryClient = useQueryClient();
     
     const mutate = async (data: GenerateReferenceGuide) => {
       setIsLoading(true);
@@ -34,7 +36,8 @@ interface GenerateGuideProps {
         const headers = getAuthorizationHeaders();
         await axios.get(API_URL + 'project/read-repo/'+ data.project_id +'/', { headers }).then(response => {
             if (response.data.status === 'success') {
-                getSuccess('Generating guides, this may take several minutes...');
+                getSuccess('Confirming reference guides, this may take several minutes...');
+                queryClient.invalidateQueries(['guide-project', data.project_name, data.owner]);
                 GenerateGuide(data);
             }else {
                 getError('Error getting information from github');

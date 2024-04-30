@@ -1,5 +1,5 @@
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import GenericPaper from "../common/Container/GenericPaper";
 import { GenericFrame } from "../common/Frame/GenericFrame";
 import Search from "../common/Search/Search";
@@ -12,13 +12,23 @@ import GuideList from "../components/Guide/GuideList";
 import GuideInfo from "../components/Guide/GuideInfo";
 import NotFound from "./NotFound";
 import GuideDialog from "../components/Guide/GuideDialog";
+import { useGenerateGuide } from "../queries/useProject";
 //import { convertTimestampToDate } from "../utils/filtered";
 
 const ReferenceGuideView: React.FC = () => {
     const params = useParams();
+    const {isLoading: isLoadingGuide} = useGenerateGuide();
     const {isLoading, data, dataUpdatedAt} = useGuideProject(params.project as string, params.owner as string);
     const [searchTerm, setSearchTerm] = useState('');
+    const [generation, setGeneration] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
+
+
+    useEffect(() => {
+        if (!data?.is_Loading && !isLoadingGuide) {
+            setGeneration(false);
+        }
+    }, [data?.is_Loading, isLoadingGuide]);
 
     const handleOpen = () => setOpenDialog(true);
     const handleClose = () => setOpenDialog(false);
@@ -30,6 +40,7 @@ const ReferenceGuideView: React.FC = () => {
 
     const handleSave = (data: string) => {
         console.log(data);
+        setGeneration(true);
       };
 
     const is_valid_url = (params.project as string !== undefined && params.owner as string !== undefined);
@@ -46,10 +57,10 @@ const ReferenceGuideView: React.FC = () => {
             <BasicFrame isCentered={false} className="mt-10" style={{flexDirection:'column'}}>
                 <BasicFrame isCentered={false} className="items-center justify-between" style={{width: '100%', paddingBottom:'1.3em'}}>
                     <Typography style={{ fontSize: '1.3em'}}><span style={{fontWeight: 'bold'}}>{data.title}</span></Typography>
-                    <Button disabled={data?.is_Loading} onClick={handleOpen} 
+                    <Button disabled={data?.is_Loading || generation || isLoadingGuide} onClick={handleOpen} 
                         variant="contained" className="btn-generate" style={{backgroundColor: '#a5c96d', color: '#fff', padding:'0 1.5em', borderRadius: '0.3em', fontSize: '0.8em', width:'228px', height:'44px',}}>
                             {
-                            (data?.is_Loading)?
+                            (data?.is_Loading || generation || isLoadingGuide)?
                             (
                             <CircularProgress size={15} style={{color:'#fff'}}/>
                             ) 
@@ -60,10 +71,10 @@ const ReferenceGuideView: React.FC = () => {
                     <GenericPaper style={{height: '530px', width: '90vw', maxWidth: '860px'}}>
                         <Search searchTerm={searchTerm} onSearch={handleSearch}/>
                         <GenericPaper className="mt-4" style={{padding:'0.5em', height: '85%'}}>
-                            <GuideList projects={data?.assets} name={searchTerm}/>
+                            <GuideList projects={data?.assets} name={searchTerm} guide={data}/>
                         </GenericPaper>
                     </GenericPaper>
-                    <GuideInfo projects={data} updatedAt={dataUpdatedAt}/>
+                    <GuideInfo projects={data} updatedAt={dataUpdatedAt} loading={generation}/>
                 </BasicFrame>
             </BasicFrame>
             </GenericFrame>

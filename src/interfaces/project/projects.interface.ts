@@ -43,4 +43,6 @@ export interface GenerateReferenceGuide {
     project_id: number;
     lang: string;
     theme: string;
+    owner?: string;
+    project_name?: string;
 }

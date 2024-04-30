@@ -14,12 +14,15 @@ import TwoFAView from "../pages/2FAView";
 import ForgottenPassword from "../pages/ForgottenPassword";
 import ResetPassword from "../pages/ResetPassword";
 import NotFound from "../pages/NotFound";
+import ReferenceGuideInfoView from "../pages/ReferenceGuideInfoView";
+import ReferenceGuideInfoSharedView from "../pages/ReferenceGuideInfoSharedView";
 //import { AppTwo } from "../App copy";
 
 export const AppRouter: React.FC = () => {
     return (
         <Router>
             <Routes>
+                <Route path="/guide/shared/:url" element={<ReferenceGuideInfoSharedView/>} />
                 <Route path="/" element={<RouterLayout/>}>
                     <Route path="/" element={<HomeView/>} />
                     <Route path="/login" element={<LoginView/>} />
@@ -32,6 +35,7 @@ export const AppRouter: React.FC = () => {
                     <Route path="/projects" element={<ProtectedRoute component={ProjectView} />} />
                     <Route path="/workspace/:name" element={<ProtectedRoute component={WorkSpaceView} />} />
                     <Route path="/info/:owner/:project" element={<ProtectedRoute component={ReferenceGuideView} />} />
+                    <Route path="/guide/:owner/:project/:version" element={<ProtectedRoute component={ReferenceGuideInfoView} />} />
                     <Route path="*" element={<NotFound root=""/>} />
                    {/*  <Route path="/projects/:name" element={<ProtectedRoute component={ProjectView} />} /> */}
                 </Route>

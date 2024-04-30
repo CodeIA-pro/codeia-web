@@ -101,6 +101,26 @@ body {
     }
   }
 
+  .markdown-container code {
+    display: inline-block;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-wrap: anywhere;
+  }
+
+  .text-wrap {
+    width: 300px;
+    overflow-wrap: break-word;
+    white-space: pre-line;
+    display: inline-block;
+  }
+
+  .dialog .MuiDialog-paper {
+    background-color: black;
+    color: white;
+  }
+  
+
   @media (max-width: 1500px) {
     .cardWithAnimatedBorderTwo,
     .cardWithAnimatedBorder {

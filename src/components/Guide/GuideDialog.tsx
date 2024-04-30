@@ -42,13 +42,14 @@ const GuideDialog: React.FC<DialogProps> = ({ open, onClose, onSave,  initialDat
   };
 
   const handleSave = () => {
-    //console.log(lang, initialData, value, arrayToString(selectedOptions, Sections));
     const data ={
         sections: arrayToString(selectedOptions, Sections),
         token: user?.access,
         project_id: initialData.id,
         lang: lang,
         theme: value,
+        owner: initialData.user_repo,
+        project_name: initialData.title
     }
     mutate(data);
     onClose();
