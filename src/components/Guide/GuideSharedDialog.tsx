@@ -70,17 +70,17 @@ const GuideSharedDialog: React.FC<DialogProps> = ({ initialData, open, onClose }
                 </Typography>
             </DialogTitle>
             <DialogContent style={{padding: '10px'}}>
-                <BasicFrame isCentered={false} className='justify-start items-center pt-2 pb-4'>                    
+                <BasicFrame isCentered={false} className='justify-start items-center pt-1 pb-6'>                    
                     { access === 'private' ? 
-                        <BasicFrame style={{backgroundColor: '#e3e3e3', padding:'0.5em', borderRadius:'9em', width:'50px', height:'50px'}}>
+                        <BasicFrame style={{backgroundColor: '#e3e3e3', padding:'0.5em', borderRadius:'9em', width:'60px', height:'60px'}}>
                             <HttpsIcon style={{fontSize: '1.5em', color:'#072711'}}/>
                         </BasicFrame>
                          : 
-                        <BasicFrame style={{backgroundColor: '#c4eed0', padding:'0.5em', borderRadius:'9em', width:'50px', height:'50px'}}>
+                        <BasicFrame style={{backgroundColor: '#c4eed0', padding:'0.5em', borderRadius:'9em', width:'60px', height:'60px'}}>
                             <PublicIcon style={{fontSize: '1.5em', color:'#072711'}}/>
                         </BasicFrame>
                     }
-                    <BasicFrame isCentered={false} className='ml-2 flex-col'>
+                    <BasicFrame isCentered={false} className='ml-4 flex-col'>
                     <Select
                         disabled={isLoading}
                         labelId="demo-select-small-label"
@@ -99,7 +99,6 @@ const GuideSharedDialog: React.FC<DialogProps> = ({ initialData, open, onClose }
                         <Typography style={{fontSize: '0.8em', fontWeight: '500', marginTop:'0.5em'}}>Any Internet user with the link can see it</Typography>
                     }
                     </BasicFrame>
-
                 </BasicFrame>
             </DialogContent>
             <DialogActions style={{display:'flex', justifyContent:'space-between', padding:'0 10px'}}>
