@@ -5,7 +5,7 @@ import { GenericFrame } from "../common/Frame/GenericFrame";
 import Search from "../common/Search/Search";
 import { BasicFrame } from "../common/Frame/BasicFrame";
 import Progress from "../common/Progress/Progress";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import { useProjects } from "../queries/useProject";
@@ -39,12 +39,10 @@ const ProjectView: React.FC = () => {
                     <GenericPaper style={{height: '530px', width: '90vw', maxWidth: '860px'}}>
                         <Box className="mb-4 flex items-start place-content-between">
                             <Typography variant="body1" className="text-base font-normal">Workspaces created</Typography>
-                            <Box className="flex items-center">
+                            <Button onClick={handleOpen} className="flex items-center" style={{backgroundColor:'#fff', textTransform: 'none', padding:'0'}}>
                                 <Typography variant="caption" className="text-xl mr-1">Add a workspace</Typography>
-                                <IconButton onClick={handleOpen} size="small" className="p-1">
-                                    <AddCircleIcon style={{height:'0.78em', width:'0.7em', color: '#1e2f50'}}/>
-                                </IconButton>
-                            </Box>
+                                <AddCircleIcon style={{height:'0.78em', width:'0.7em', color: '#1e2f50', marginLeft:'8px'}}/>
+                            </Button>
                         </Box>
                         <Search searchTerm={searchTerm} onSearch={handleSearch}/>
                         <GenericPaper className="mt-4" style={{padding:'0.5em', height: '75%'}}>

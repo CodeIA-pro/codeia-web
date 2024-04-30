@@ -27,6 +27,7 @@ export const NavBar: React.FC = () => {
     }
     
     const handleProfileMenuOpen = (event: any) => {
+        console.log(event.currentTarget);
         setAnchorEl(event.currentTarget);
     };
 

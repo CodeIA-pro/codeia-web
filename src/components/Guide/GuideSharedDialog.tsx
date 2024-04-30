@@ -47,7 +47,6 @@ const GuideSharedDialog: React.FC<DialogProps> = ({ initialData, open, onClose }
     };
 
     const copyLink = () => {
-        console.log(link);
         if (link !== '') {
             navigator.clipboard.writeText(`https://codeia-web.vercel.app/guide/shared/${link}`);
             getSuccess('Link copied');

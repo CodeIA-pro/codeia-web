@@ -54,8 +54,8 @@ const DialogProject: React.FC<DialogProps> = ({ open, onClose }) => {
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
         <div style={{padding:'1em'}}>
             
-            <DialogTitle>
-                <Typography style={{ textAlign:'start', fontSize: '0.9em', fontWeight: '400', display:'flex', flexDirection:'row', alignItems:'center' }}>
+            <DialogTitle style={{padding:'15px 24px 5px 24px'}}>
+                <Typography style={{ textAlign:'start', fontSize: '0.9em', fontWeight: '400', display:'flex', flexDirection:'row', alignItems:'center', }}>
                     Create a new workspace
                 </Typography>
             </DialogTitle>

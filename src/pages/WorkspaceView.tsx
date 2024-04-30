@@ -2,7 +2,7 @@
 import { Fragment, useState } from "react";
 import { GenericFrame } from "../common/Frame/GenericFrame";
 import { BasicFrame } from "../common/Frame/BasicFrame";
-import { ListItemIcon, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useProjectItem, useProjectName } from "../queries/useProject";
 import { useParams } from "react-router-dom";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -40,9 +40,7 @@ const WorkSpaceView: React.FC = () => {
                 <BasicFrame isCentered={false} className="mt-10" style={{flexDirection:'column'}}>
                     <BasicFrame isCentered={false} className="flex-col" style={{width: '90vw', maxWidth: '860px'}}>
                         <Typography style={{ fontSize: '1.3em'}}><span style={{fontWeight: 'bold'}}>{project.title}</span>&nbsp; 
-                        <ListItemIcon style={{cursor:'pointer', width:'20px !important'}} onClick={handleOpen}>
-                            <BorderColorIcon style={{ width:'18px', paddingTop:'5px'}} />
-                        </ListItemIcon>
+                        <BorderColorIcon style={{ width:'18px', cursor:'pointer'}} onClick={handleOpen}/>
                         </Typography>
                         <Typography style={{ fontSize: '0.8em', paddingTop:'0.5em', paddingBottom:'1.5em'}}>
                             {(project.description.trim() == '' ? 'No description' : project.description)}
