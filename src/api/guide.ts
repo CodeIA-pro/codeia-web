@@ -28,6 +28,12 @@ export const guideVersionProject = async (version: string, project: string, repo
     return response.data[0];
   };
 
+  export const getPrivacy = async (project_id: number, asset_id: number): Promise<PrivacyResponse> => {
+    const headers = getAuthorizationHeaders();
+    const response = await axios.get(API_URL + 'asset/privacy/project/'+ project_id +'/asset/'+ asset_id +'/', { headers });
+    return response.data;
+  };
+
   export const updatePrivacy = async (data: Privacy): Promise<PrivacyResponse> => {
     const headers = getAuthorizationHeaders();
     const response = await axios.post(API_URL + 'asset/privacy/', data , { headers });

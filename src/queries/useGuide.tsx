@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { guideProject, guideURLProject, guideVersion, guideVersionProject, updatePrivacy } from "../api/guide";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getPrivacy, guideProject, guideURLProject, guideVersion, guideVersionProject, updatePrivacy } from "../api/guide";
 import { sortArray } from "../utils/filtered";
 import { useNotification } from "../hooks/useNotification";
 import { Privacy } from "../interfaces/guide/guide.interface";
@@ -48,12 +48,22 @@ export const useGuideVersionURL = (url: string,) => {
   return info;
 }
 
+export const useGuidePrivacyStatus = (project_id: number, asset_id: number) => {
+  const info = useQuery({
+      queryKey: ['guide-privacy', project_id, asset_id],
+      queryFn: () => getPrivacy(project_id, asset_id),
+    });
+  return info;
+}
+
 export const useGuidePrivacy = () => {
+  const queryClient = useQueryClient();
   const {getSuccess} = useNotification();
   const info = useMutation({
       mutationFn: (data: Privacy) => updatePrivacy(data),
-      onSuccess: () => {
+      onSuccess: (data) => {
         getSuccess('Privacy updated');
+        queryClient.resetQueries(['guide-privacy', data.project_id, data.asset_id]);
       }
     });
   return info;

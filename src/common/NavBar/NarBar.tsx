@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useAuthStore } from '../../store';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import './new.css';
 
 export const NavBar: React.FC = () => {
@@ -25,11 +26,10 @@ export const NavBar: React.FC = () => {
         navigate('/login');
         logout();
     }
-    
-    const handleProfileMenuOpen = (event: any) => {
-        console.log(event.currentTarget);
-        setAnchorEl(event.currentTarget);
-    };
+
+    const handleProfileMenuOpen = (event: any) => setAnchorEl(event.currentTarget);
+
+    const handleProfile = () => navigate('/profile');
 
     const handleSelectRepo = () => {
         setTimeout(() => {
@@ -74,27 +74,34 @@ export const NavBar: React.FC = () => {
                                             sx={{ borderColor: 'white', paddingLeft:'1em' }}
                                             color="inherit"
                                         >
-                                            <Typography fontWeight="300"> { user.name } </Typography>
-                                            <Box mr={1} />
                                             <AccountCircle />
+                                            <Box mr={1} />
+                                            <Typography fontWeight="300"> { user.name } </Typography>
+                                            <KeyboardArrowDownIcon  style={{fontSize:'0.65em', marginLeft:'0.8em'}}/>
                                         </IconButton>
                                         <Menu
                                             id="menu-appbar"
                                             anchorEl={anchorEl}
                                             anchorOrigin={{
-                                                vertical: 'bottom', // Cambia 'top' a 'bottom'
+                                                vertical: 'bottom',
                                                 horizontal: 'right',
                                             }}
                                             keepMounted
                                             transformOrigin={{
-                                                vertical: 'top', // Esto coloca el menú justo debajo del icono
+                                                vertical: 'top',
                                                 horizontal: 'right',
                                             }}
+                                            sx={{
+                                                '& .MuiMenu-paper': {
+                                                  width: '200px',
+                                                  maxWidth: 'none', // Esto anula el ancho máximo predeterminado
+                                                },
+                                              }}
                                             open={isMenuOpen}
                                             onClose={() => setAnchorEl(null)}
                                         >
-                                            <MenuItem style={{fontSize: '0.8em'}} onClick={() => setAnchorEl(null)}>Mi cuenta</MenuItem>
-                                            <MenuItem style={{fontSize: '0.8em'}} onClick={handleLogout}>Cerrar sesión</MenuItem>
+                                            <MenuItem style={{fontSize: '0.8em'}} onClick={() => {handleProfile(); setAnchorEl(null)}}>Mi cuenta</MenuItem>
+                                            <MenuItem style={{fontSize: '0.8em'}} onClick={() => {handleLogout(); setAnchorEl(null)}}>Cerrar sesión</MenuItem>
                                         </Menu>
 
                                     </div>

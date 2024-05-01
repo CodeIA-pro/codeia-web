@@ -44,4 +44,6 @@ export interface PrivacyResponse {
     status: string;
     link:   string;
     privacy: string;
+    project_id: number;
+    asset_id: number;
 }

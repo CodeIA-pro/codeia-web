@@ -16,8 +16,7 @@ import ResetPassword from "../pages/ResetPassword";
 import NotFound from "../pages/NotFound";
 import ReferenceGuideInfoView from "../pages/ReferenceGuideInfoView";
 import ReferenceGuideInfoSharedView from "../pages/ReferenceGuideInfoSharedView";
-//import { AppTwo } from "../App copy";
-
+import ProfileView from "../pages/ProfileView";
 export const AppRouter: React.FC = () => {
     return (
         <Router>
@@ -34,22 +33,12 @@ export const AppRouter: React.FC = () => {
                     <Route path="/connection" element={<ProtectedRoute component={RedirectGithubView} />} />
                     <Route path="/projects" element={<ProtectedRoute component={ProjectView} />} />
                     <Route path="/workspace/:name" element={<ProtectedRoute component={WorkSpaceView} />} />
+                    <Route path="/profile" element={<ProtectedRoute component={ProfileView} />} />
                     <Route path="/info/:owner/:project" element={<ProtectedRoute component={ReferenceGuideView} />} />
                     <Route path="/guide/:owner/:project/:version" element={<ProtectedRoute component={ReferenceGuideInfoView} />} />
                     <Route path="*" element={<NotFound root=""/>} />
-                   {/*  <Route path="/projects/:name" element={<ProtectedRoute component={ProjectView} />} /> */}
                 </Route>
             </Routes>
         </Router>
     );
 };
-/*  
-<Route path="/login" element={<LoginPage/>} />
-<Route path="/register" element={<RegisterPage/>} />
-<Route path="/connection" element={<ProtectedRoute component={ConnectionPage} />} />
-<Route path="/projects" element={<ProtectedRoute component={ProjectPage} />} />
-<Route path="/select-repo" element={<ProtectedRoute component={RepoPage} />} />
-
-<Route path="/guide/:user/:project/:version" element={<ProtectedRoute component={ReferenceGuidePage} />} />
-<Route path="*" element={<NotFoundPage/>} />
-*/

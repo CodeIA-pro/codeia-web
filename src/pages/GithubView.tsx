@@ -9,7 +9,7 @@ import { UserGithub } from "../interfaces/github/user-github.interface";
 import { ProjectGithub } from "../interfaces/github/projects-github.interface";
 import { BasicFrame } from "../common/Frame/BasicFrame";
 import Progress from "../common/Progress/Progress";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 import TuneIcon from '@mui/icons-material/Tune';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -41,12 +41,6 @@ const GithubView: React.FC = () => {
                     <GenericPaper style={{height: '530px', width: '90vw', maxWidth: '860px'}}>
                         <Box className="mb-4 flex items-start place-content-between">
                             <Typography variant="body1" className="text-base font-normal">Connect a GitHub repository</Typography>
-                            <Box className="flex items-center">
-                                <Typography variant="caption" className="text-xl mr-1">Update Permissions</Typography>
-                                <IconButton onClick={updatePermission} size="small" className="p-1">
-                                    <TuneIcon style={{height:'0.7em', width:'0.7em'}}/>
-                                </IconButton>
-                            </Box>
                         </Box>
                         <Search searchTerm={searchTerm} onSearch={handleSearch}/>
                         <GenericPaper className="mt-4" style={{padding:'0.5em', height: '75%'}}>
@@ -63,15 +57,19 @@ const GithubView: React.FC = () => {
                             <GitHubIcon style={{fontSize: '1.5em'}}/> &nbsp; GitHub
                         </Typography>
 
-                        <a href={`${userProfileUrl(user)}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: '#6c93f1' }}>
+                        <a href={`${userProfileUrl(user)}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: '#6c93f1' , marginTop:'0.3em'}}>
                             <Typography style={{ display:'flex', alignItems:'center', cursor: 'pointer',}}>
                                 <PersonOutlineIcon style={{fontSize: '1.2em'}}/> @{user.login} <OpenInNewIcon style={{fontSize: '0.9em'}}/>
                             </Typography>
                         </a>
                         <span style={{color: '#111623', fontSize: '0.9em'}}>{projects.length} Repos</span>
-                        <Typography style={{fontSize: '1em', fontWeight: '400', display:'flex', alignItems:'center'}}>
+                        <Typography style={{fontSize: '1em', fontWeight: '400', display:'flex', alignItems:'center', marginTop:'0.3em'}}>
                             Updated at: {convertTimestampToDate(dataUpdatedAt)}
                         </Typography>
+                        <Button onClick={updatePermission} className="flex items-center" style={{padding:'0', backgroundColor:'#fff', textTransform: 'none', marginBottom:'1em', marginTop:'0.5em'}}>
+                            <TuneIcon style={{height:'0.9em', width:'0.7em', marginRight:'0.3em'}}/>
+                            <Typography variant="caption" style={{fontSize: '1em'}}>Update Permissions</Typography>
+                        </Button>
                     </BasicFrame>
                 </BasicFrame>
 

@@ -92,9 +92,11 @@ const GuideList: React.FC<GuideListProps> = ({guide, projects, name='' }) => {
     :(
     <BasicFrame className='w-full h-full'>
         <Typography>No guide found</Typography>
-    </BasicFrame>)}
+    </BasicFrame>) }
+    { project && project.subsection.length > 0 &&
+        <GuideSharedDialog open={openSharedDialog} onClose={handleSharedClose} initialData={project} version={version}/>
+    }
     <GuideCompilationDialog open={openDialog} onClose={handleClose} initialData={project}/>
-    <GuideSharedDialog open={openSharedDialog} onClose={handleSharedClose} initialData={project} version={version}/>
     </Fragment>);
 }
 
