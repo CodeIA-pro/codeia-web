@@ -25,19 +25,12 @@ interface DialogProps {
 const GuideSharedDialog: React.FC<DialogProps> = ({ initialData, open, onClose }) => {
     const {isLoading: loadingPrivacy, data: privacy} = useGuidePrivacyStatus(initialData?.project_id, initialData?.id);
     const [access, setAccess] = React.useState<string>('');
-    const [link, setLink] = React.useState<string>('');
-    const {mutate, isLoading, data} = useGuidePrivacy();
+    const {mutate, isLoading} = useGuidePrivacy();
     const { getSuccess, getWarning } =useNotification();
 
     useEffect(() => {
         setAccess(privacy?.privacy || 'private');
     }, [loadingPrivacy, privacy]);
-
-    useEffect(() => {
-        if(!isLoading && data && data.link !== '') {
-            setLink(data.link);
-        }
-    }, [isLoading, data]);
 
     const handleChange = (event: any) => {
         const privacy = event.target.value as string;
@@ -48,12 +41,8 @@ const GuideSharedDialog: React.FC<DialogProps> = ({ initialData, open, onClose }
     };
 
     const copyLink = () => {
-        if (link !== '') {
-            navigator.clipboard.writeText(`https://codeia-web.vercel.app/guide/shared/${link}`);
-            getSuccess('Link copied');
-        }
-        else if (initialData && initialData.url !== ''){
-            navigator.clipboard.writeText(`https://codeia-web.vercel.app/guide/shared/${initialData.url}`);
+        if (!loadingPrivacy && privacy && privacy?.link) {
+            navigator.clipboard.writeText(`https://codeia-web.vercel.app/guide/shared/${privacy.link}`);
             getSuccess('Link copied');
         }
         else{

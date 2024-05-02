@@ -9,6 +9,15 @@ export interface UserResponse {
     status: boolean
     two_factor: boolean
   }
+
+export interface User {
+    email?: string
+    name?: string
+    full_name?: string
+    surname?: string
+    two_factor?: boolean
+    repo_login?: boolean
+}
   
 export interface RegisterResponse {
     name: string

@@ -5,6 +5,7 @@ import { UserResponse } from './interfaces/user/user.interface';
 interface AuthState {
   user: UserResponse | null;
   login: (userData: UserResponse, newRepoLoginValue?: boolean) => void;
+  updateName: (userData: UserResponse, newNameValue: string) => void;
   logout: () => void;
 }
 
@@ -14,6 +15,13 @@ const updateUserRepoLogin = (user: UserResponse, newValue: boolean): UserRespons
     repo_login: newValue,
   };
 };
+
+const updateUserName = (user: UserResponse, newValue: string): UserResponse => {
+  return {
+    ...user,
+    name: newValue,
+  };
+}
 
 export const useAuthStore = create(
   persist<AuthState>(
@@ -28,6 +36,11 @@ export const useAuthStore = create(
         })),
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       logout: () => set((_) => ({ user: null })),
+      updateName: (userData, newNameValue) =>
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        set((_) => ({
+          user: updateUserName(userData, newNameValue), 
+        })),
     }),
     {
       name: 'auth-store',
