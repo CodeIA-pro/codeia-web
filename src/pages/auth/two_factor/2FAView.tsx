@@ -1,17 +1,17 @@
 import { TextField, Typography } from "@mui/material";
-import { GenericFrame } from "../common/Frame/GenericFrame";
+import { GenericFrame } from "../../../common/Frame/GenericFrame";
 import { useEffect, useState } from "react";
-import GenericPaper from "../common/Container/GenericPaper";
-import { useCheck } from "../queries/useAuth";
-import { validateNumber } from "../utils/filtered";
-import ButtonValidateUI from "../common/Button/ButtonValidateUI";
-import { useAuthStore } from "../store";
+import GenericPaper from "../../../common/Container/GenericPaper";
+import { use2FA } from "../../../queries/useAuth";
+import { validateNumber } from "../../../utils/filtered";
+import ButtonValidateUI from "../../../common/Button/ButtonValidateUI";
+import { useAuthStore } from "../../../store";
 import { useNavigate } from "react-router-dom";
 
-const VerifyView: React.FC = () => {
+const TwoFAView: React.FC = () => {
     const [code, setCode] = useState(0);
     const [disabled, setDisabled] = useState(false);
-    const {isLoading, mutate} = useCheck();
+    const {isLoading, mutate} = use2FA();
     const { user } = useAuthStore();
     const navigate = useNavigate()
     
@@ -31,7 +31,8 @@ const VerifyView: React.FC = () => {
   return(
     <GenericFrame>
         <GenericPaper style={{width: '90vw', maxWidth: '560px', padding:'3em'}} className="flex flex-col justify-start items-start">
-            <Typography sx={{fontSize:'1.2em', textAlign: 'start', fontWeight:'700'}}>Verify account</Typography>
+        <Typography sx={{fontSize:'1.2em', textAlign: 'start', fontWeight:'700'}}>Two-factor authentication</Typography>
+            <Typography sx={{fontSize:'1em', textAlign: 'start', fontWeight:'300'}}>You have two-factor authentication set-up on your account for added security.</Typography>
             <Typography sx={{fontSize:'1em', textAlign: 'start', fontWeight:'300', mt:2}}>A code has just been sent to your email. <br></br> Please enter it below.</Typography>
               <TextField 
                   type="number"
@@ -59,4 +60,4 @@ const VerifyView: React.FC = () => {
   );
 }
 
-export default VerifyView;
+export default TwoFAView;

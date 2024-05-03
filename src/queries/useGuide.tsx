@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getPrivacy, guideProject, guideURLProject, guideVersion, guideVersionProject, updatePrivacy } from "../api/guide";
+import { getPrivacy, guideProject, guideURLProject, guideVersion, guideVersionProject, starGuide, updatePrivacy } from "../api/guide";
 import { sortArray } from "../utils/filtered";
 import { useNotification } from "../hooks/useNotification";
-import { Privacy } from "../interfaces/guide/guide.interface";
+import { Privacy, Star } from "../interfaces/guide/guide.interface";
 
 export const useGuideProject = (project: string, owner: string) => {
     const info = useQuery({
@@ -64,6 +64,17 @@ export const useGuidePrivacy = () => {
       onSuccess: (data) => {
         getSuccess('Privacy updated');
         queryClient.resetQueries(['guide-privacy', data.project_id, data.asset_id]);
+      }
+    });
+  return info;
+}
+
+export const useStar = () => {
+  const {getSuccess} = useNotification();
+  const info = useMutation({
+      mutationFn: (data: Star) => starGuide(data),
+      onSuccess: () => {
+        getSuccess('Star updated');
       }
     });
   return info;

@@ -32,6 +32,8 @@ export interface Asset {
     url_commit:       string;
     short_sha:        string;
     length:           number;
+    star_average:     number;
+    start_quantity:   number;
 }
 
 export interface Privacy {
@@ -45,5 +47,10 @@ export interface PrivacyResponse {
     link:   string;
     privacy: string;
     project_id: number;
+    asset_id: number;
+}
+
+export interface Star {
+    star: number;
     asset_id: number;
 }

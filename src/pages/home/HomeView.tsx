@@ -1,18 +1,18 @@
-import { GenericFrame } from "../common/Frame/GenericFrame"
+import { GenericFrame } from "../../common/Frame/GenericFrame"
 import { Button } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
-import { BasicFrame } from "../common/Frame/BasicFrame";
-import { HomeSectionTitle } from "../components/Home/HomeSectionTitle";
-import { HomeSectionText } from "../components/Home/HomeSectionText";
-import { HomeSectionContent } from "../components/Home/HomeSectionContent";
-import { HomeSectionCard } from "../components/Home/HomeSectionCard";
-import { HomeSectionItem } from "../components/Home/HomeSectionItem";
+import { BasicFrame } from "../../common/Frame/BasicFrame";
+import { HomeSectionTitle } from "../../components/Home/HomeSectionTitle";
+import { HomeSectionText } from "../../components/Home/HomeSectionText";
+import { HomeSectionContent } from "../../components/Home/HomeSectionContent";
+import { HomeSectionCard } from "../../components/Home/HomeSectionCard";
+import { HomeSectionItem } from "../../components/Home/HomeSectionItem";
 import { useLocation } from "react-router-dom";
-import { Redirection } from "../helpers/home.helpers";
-import Features from "../utils/home.utils";
+import { Redirection } from "../../helpers/home.helpers";
+import Features from "../../utils/home.utils";
 
 /* Images */
-import backgroundImage from "../../assets/home.png";
+import backgroundImage from "../../../assets/home.png";
 
 const HomeView: React.FC= () => {
   const [clicked, setClicked] = useState(false);

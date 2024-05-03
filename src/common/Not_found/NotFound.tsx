@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
-import { BasicFrame } from "../common/Frame/BasicFrame";
-import { GenericFrame } from "../common/Frame/GenericFrame";
+import { BasicFrame } from "../Frame/BasicFrame";
+import { GenericFrame } from "../Frame/GenericFrame";
 
 const NotFound: React.FC<{root: string}> = ({root=''}) => {
   return(

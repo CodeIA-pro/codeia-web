@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { GenericFrame } from "../common/Frame/GenericFrame";
-import { BasicFrame } from "../common/Frame/BasicFrame";
+import { GenericFrame } from "../../../common/Frame/GenericFrame";
+import { BasicFrame } from "../../../common/Frame/BasicFrame";
 import { FormGroup, TextField, Typography } from "@mui/material";
-import { useLogin } from "../queries/useAuth";
-import { LoginRequest } from "../interfaces/auth/auth.interface";
+import { useLogin } from "../../../queries/useAuth";
+import { LoginRequest } from "../../../interfaces/auth/auth.interface";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../store";
-import Logo from '../../assets/logo.svg';
-import ButtonUI from "../common/Button/ButtonUI";
+import { useAuthStore } from "../../../store";
+import Logo from '../../../../assets/logo.svg';
+import ButtonUI from "../../../common/Button/ButtonUI";
 
 const LoginView: React.FC = () => {
   const { isLoading, mutate } = useLogin();

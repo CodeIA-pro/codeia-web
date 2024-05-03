@@ -1,17 +1,17 @@
 
 import { Fragment, useState } from "react";
-import { GenericFrame } from "../common/Frame/GenericFrame";
-import { BasicFrame } from "../common/Frame/BasicFrame";
+import { GenericFrame } from "../../common/Frame/GenericFrame";
+import { BasicFrame } from "../../common/Frame/BasicFrame";
 import { Typography } from "@mui/material";
-import { useProjectItem, useProjectName } from "../queries/useProject";
+import { useProjectItem, useProjectName } from "../../queries/useProject";
 import { useParams } from "react-router-dom";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import GenericPaper from "../common/Container/GenericPaper";
-import Search from "../common/Search/Search";
-import Progress from "../common/Progress/Progress";
-import WorkSpaceList from "../components/WorkSpace/WorkSpaceList";
-import NotFound from "./NotFound";
-import EditProjectDialog from "../components/Project/EditProjectDialog";
+import GenericPaper from "../../common/Container/GenericPaper";
+import Search from "../../common/Search/Search";
+import Progress from "../../common/Progress/Progress";
+import WorkSpaceList from "../../components/WorkSpace/WorkSpaceList";
+import NotFound from "../../common/Not_found/NotFound";
+import EditProjectDialog from "../../components/Project/EditProjectDialog";
 
 const WorkSpaceView: React.FC = () => {
     const params = useParams();

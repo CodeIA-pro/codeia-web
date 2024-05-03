@@ -1,13 +1,13 @@
 import { Fragment, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { GenericFrame } from '../common/Frame/GenericFrame';
-import Progress from '../common/Progress/Progress';
-import { BasicFrame } from '../common/Frame/BasicFrame';
-import NotFound from './NotFound';
-import GuideNavbar from '../components/GuideInfo/GuideNavbar';
-import { useGuideVersionURL } from '../queries/useGuide';
-import Markdown from '../common/Markdown/Markdown';
-import { Welcome } from '../utils/welcome.util';
+import { GenericFrame } from '../../common/Frame/GenericFrame';
+import Progress from '../../common/Progress/Progress';
+import { BasicFrame } from '../../common/Frame/BasicFrame';
+import NotFound from '../../common/Not_found/NotFound';
+import GuideNavbar from '../../components/GuideInfo/GuideNavbar';
+import { useGuideVersionURL } from '../../queries/useGuide';
+import Markdown from '../../common/Markdown/Markdown';
+import { Welcome } from '../../utils/welcome.util';
 
 const ReferenceGuideInfoSharedView: React.FC = () => {
     const params = useParams();

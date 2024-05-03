@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { BasicFrame } from "../common/Frame/BasicFrame";
-import { GenericFrame } from "../common/Frame/GenericFrame";
+import { BasicFrame } from "../../../common/Frame/BasicFrame";
+import { GenericFrame } from "../../../common/Frame/GenericFrame";
 import { Box, Button, CircularProgress, Container, FormControlLabel, Paper, Radio } from "@mui/material";
-import { loginWithGithub } from "../utils/github";
+import { loginWithGithub } from "../../../utils/github";
 
 const ConnectionView: React.FC = () => {
     const [selected, setSelected] = useState(false);

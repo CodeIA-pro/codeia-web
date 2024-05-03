@@ -1,11 +1,11 @@
 import { TextField, Typography } from "@mui/material";
-import { GenericFrame } from "../common/Frame/GenericFrame";
+import { GenericFrame } from "../../../common/Frame/GenericFrame";
 import { useEffect, useState } from "react";
-import { useRestPassword } from "../queries/useAuth";
-import GenericPaper from "../common/Container/GenericPaper";
-import ButtonValidateUI from "../common/Button/ButtonValidateUI";
+import { useRestPassword } from "../../../queries/useAuth";
+import GenericPaper from "../../../common/Container/GenericPaper";
+import ButtonValidateUI from "../../../common/Button/ButtonValidateUI";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAuthStore } from "../store";
+import { useAuthStore } from "../../../store";
 
 const ResetPassword: React.FC = () => {
     const params = useParams();

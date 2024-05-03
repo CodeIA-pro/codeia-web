@@ -1,11 +1,11 @@
 import { TextField, Typography } from "@mui/material";
-import { GenericFrame } from "../common/Frame/GenericFrame";
+import { GenericFrame } from "../../../common/Frame/GenericFrame";
 import { useEffect, useState } from "react";
-import GenericPaper from "../common/Container/GenericPaper";
-import { useForgotPassword } from "../queries/useAuth";
-import { validateEmail } from "../utils/filtered";
-import ButtonValidateUI from "../common/Button/ButtonValidateUI";
-import { useAuthStore } from "../store";
+import GenericPaper from "../../../common/Container/GenericPaper";
+import { useForgotPassword } from "../../../queries/useAuth";
+import { validateEmail } from "../../../utils/filtered";
+import ButtonValidateUI from "../../../common/Button/ButtonValidateUI";
+import { useAuthStore } from "../../../store";
 import { useNavigate } from "react-router-dom";
 
 const ForgottenPassword: React.FC = () => {

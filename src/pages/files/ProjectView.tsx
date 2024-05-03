@@ -1,19 +1,19 @@
 
 import { useState } from "react";
-import GenericPaper from "../common/Container/GenericPaper";
-import { GenericFrame } from "../common/Frame/GenericFrame";
-import Search from "../common/Search/Search";
-import { BasicFrame } from "../common/Frame/BasicFrame";
-import Progress from "../common/Progress/Progress";
+import GenericPaper from "../../common/Container/GenericPaper";
+import { GenericFrame } from "../../common/Frame/GenericFrame";
+import Search from "../../common/Search/Search";
+import { BasicFrame } from "../../common/Frame/BasicFrame";
+import Progress from "../../common/Progress/Progress";
 import { Box, Button, Typography } from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-import { useProjects } from "../queries/useProject";
-import ProjectList from "../components/Project/ProjectList";
-import { Project } from "../interfaces/project/projects.interface";
-import DialogProject from "../components/Project/ProjectDialog";
+import { useProjects } from "../../queries/useProject";
+import ProjectList from "../../components/Project/ProjectList";
+import { Project } from "../../interfaces/project/projects.interface";
+import DialogProject from "../../components/Project/ProjectDialog";
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { useNotification } from "../hooks/useNotification";
+import { useNotification } from "../../hooks/useNotification";
 import { useQueryClient } from "@tanstack/react-query";
 
 const ProjectView: React.FC = () => {

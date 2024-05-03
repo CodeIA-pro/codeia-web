@@ -1,24 +1,24 @@
 
 import { useState } from "react";
-import GenericPaper from "../common/Container/GenericPaper";
-import { GenericFrame } from "../common/Frame/GenericFrame";
-import Search from "../common/Search/Search";
-import RepoList from "../components/Github/RepoList";
-import { useGithubProjects, useGithubUser } from "../queries/useGithub";
-import { UserGithub } from "../interfaces/github/user-github.interface";
-import { ProjectGithub } from "../interfaces/github/projects-github.interface";
-import { BasicFrame } from "../common/Frame/BasicFrame";
-import Progress from "../common/Progress/Progress";
+import GenericPaper from "../../../common/Container/GenericPaper";
+import { GenericFrame } from "../../../common/Frame/GenericFrame";
+import Search from "../../../common/Search/Search";
+import RepoList from "../../../components/Github/RepoList";
+import { useGithubProjects, useGithubUser } from "../../../queries/useGithub";
+import { UserGithub } from "../../../interfaces/github/user-github.interface";
+import { ProjectGithub } from "../../../interfaces/github/projects-github.interface";
+import { BasicFrame } from "../../../common/Frame/BasicFrame";
+import Progress from "../../../common/Progress/Progress";
 import { Box, Button, Typography } from "@mui/material";
 
 import TuneIcon from '@mui/icons-material/Tune';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import { updatePermission, userProfileUrl } from "../utils/github";
-import { convertTimestampToDate } from "../utils/filtered";
+import { updatePermission, userProfileUrl } from "../../../utils/github";
+import { convertTimestampToDate } from "../../../utils/filtered";
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { useNotification } from "../hooks/useNotification";
+import { useNotification } from "../../../hooks/useNotification";
 import { useQueryClient } from "@tanstack/react-query";
 
 const GithubView: React.FC = () => {

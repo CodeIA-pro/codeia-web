@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { GenericFrame } from "../common/Frame/GenericFrame";
-import { BasicFrame } from "../common/Frame/BasicFrame";
+import { GenericFrame } from "../../../common/Frame/GenericFrame";
+import { BasicFrame } from "../../../common/Frame/BasicFrame";
 import { FormGroup, TextField, Typography } from "@mui/material";
-import { useRegister } from "../queries/useAuth";
-import { RegisterRequest } from "../interfaces/auth/auth.interface";
+import { useRegister } from "../../../queries/useAuth";
+import { RegisterRequest } from "../../../interfaces/auth/auth.interface";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../store";
-import ButtonUI from "../common/Button/ButtonUI";
+import { useAuthStore } from "../../../store";
+import ButtonUI from "../../../common/Button/ButtonUI";
 
 const RegisterView: React.FC = () => {
   const navigate = useNavigate()

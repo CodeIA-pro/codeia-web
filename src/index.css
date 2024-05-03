@@ -32,6 +32,26 @@ body {
     background-origin: border-box;
     background-clip: padding-box, border-box;
   }
+
+  .cardBasic {
+    background-color: #fff;
+    border-radius: 16px;
+    --border-size: 0.3rem;
+    border: var(--border-size) dotted transparent;
+    background-image: linear-gradient(to right, #111623, #111623), conic-gradient(from var(--angle), #4e80ee 0deg 90deg, #131d32 90deg 180deg, #4e80ee 180deg 270deg, #131d32 270deg 360deg);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  .cardPricing {
+    background-color: #fff;
+    border-radius: 16px;
+    --border-size: 0.3rem;
+    border: var(--border-size) dotted transparent;
+    background-image: linear-gradient(to right, #00ccff, #d500f9), conic-gradient(from var(--angle), #00ccff 0deg 90deg, #00ccff 90deg 180deg, #d500f9 180deg 270deg, #d500f9 270deg 360deg);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
   
   .buttonClicked {
     overflow: hidden;
@@ -95,6 +115,11 @@ body {
     .cardWithAnimatedSeccion {
       animation: rotate 6s linear infinite, opacityChange 3s infinite alternate;
     }
+    
+    .cardBasic,
+    .cardPricing {
+      animation: rotate 4s linear infinite, opacityChange 3s infinite alternate;
+    }
   
     .cardWithAnimatedSeccion {
       animation: rotate 8s linear infinite, opacityChange 3s infinite alternate;
@@ -119,6 +144,15 @@ body {
     background-color: black;
     color: white;
   }
+
+  .enterprices {
+    background: -webkit-linear-gradient(to right, #00ccff, #d500f9);
+    background: linear-gradient(to right, #00ccff, #d500f9);
+    -webkit-background-clip: text; /* Esto asegura que el gradiente se aplique dentro del texto */
+    background-clip: text; /* Esto asegura que el gradiente se aplique dentro del texto */
+    color: transparent; /* Esto hace que el texto sea transparente */
+  }
+  
   
 
   @media (max-width: 1500px) {

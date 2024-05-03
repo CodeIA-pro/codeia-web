@@ -1,18 +1,18 @@
 
 import { Fragment, useEffect, useState } from "react";
-import GenericPaper from "../common/Container/GenericPaper";
-import { GenericFrame } from "../common/Frame/GenericFrame";
-import Search from "../common/Search/Search";
-import { BasicFrame } from "../common/Frame/BasicFrame";
-import Progress from "../common/Progress/Progress";
+import GenericPaper from "../../common/Container/GenericPaper";
+import { GenericFrame } from "../../common/Frame/GenericFrame";
+import Search from "../../common/Search/Search";
+import { BasicFrame } from "../../common/Frame/BasicFrame";
+import Progress from "../../common/Progress/Progress";
 import { Button, CircularProgress, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { useGuideProject } from "../queries/useGuide";
-import GuideList from "../components/Guide/GuideList";
-import GuideInfo from "../components/Guide/GuideInfo";
-import NotFound from "./NotFound";
-import GuideDialog from "../components/Guide/GuideDialog";
-import { useGenerateGuide } from "../queries/useProject";
+import { useGuideProject } from "../../queries/useGuide";
+import GuideList from "../../components/Guide/GuideList";
+import GuideInfo from "../../components/Guide/GuideInfo";
+import NotFound from "../../common/Not_found/NotFound";
+import GuideDialog from "../../components/Guide/GuideDialog";
+import { useGenerateGuide } from "../../queries/useProject";
 
 const ReferenceGuideView: React.FC = () => {
     const params = useParams();

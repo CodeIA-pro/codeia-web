@@ -35,6 +35,13 @@ const theme = createTheme({
         fontSize: 16,
     },
     components: {
+        MuiRating: {
+            styleOverrides: {
+              iconEmpty: {
+                color: '#fff',
+              },
+            },
+          },
         MuiButton: {
             defaultProps: {
                 style: {

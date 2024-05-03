@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
     Box, 
@@ -22,20 +22,18 @@ export const NavBar: React.FC = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
     const { user, logout } = useAuthStore();
+
+
+    const handleProfileMenuOpen = (event: any) => setAnchorEl(event.currentTarget);
+    const handleProfile = () => navigate('/profile');
     const handleLogout = () => {
         navigate('/login');
         logout();
     }
-
-    const handleProfileMenuOpen = (event: any) => setAnchorEl(event.currentTarget);
-
-    const handleProfile = () => navigate('/profile');
-
     const handleSelectRepo = () => {
         setTimeout(() => {
             navigate('/connection');
-        }
-        , 200);
+        }, 200);
     };
 
     return (
@@ -54,8 +52,14 @@ export const NavBar: React.FC = () => {
                             </Grid>
 
                             <Grid item style={{display: 'flex', justifyContent: 'center', alignItems:'center'}}>
-                                <Typography onClick={() => navigate('/')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Home </Typography>
-                                <Typography onClick={() => navigate('/#feature')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Features </Typography>
+                                { !user ?
+                                    <Fragment>
+                                        <Typography onClick={() => navigate('/')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Home </Typography>
+                                        <Typography onClick={() => navigate('/#feature')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Features </Typography>
+                                        <Typography onClick={() => navigate('/pricing')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Plans </Typography>
+                                    </Fragment>
+                                    : <div></div>
+                                }
                                 {user != null ? (<Typography onClick={() => navigate('/projects')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Projects </Typography>) : (<div></div>)}
                             </Grid>
                             <Grid item>

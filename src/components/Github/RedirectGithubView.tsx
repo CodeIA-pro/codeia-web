@@ -1,13 +1,14 @@
 import React from 'react';
 import { Fragment, useEffect, useRef  } from 'react';
 import { useGithubStatus } from '../../queries/useGithub';
-import GithubView from '../../pages/GithubView';
-import ConnectionView from '../../pages/ConnectionView';
+
+import ConnectionView from '../../pages/github/connecting_github/ConnectionView';
 import { GenericFrame } from '../../common/Frame/GenericFrame';
 import Progress from '../../common/Progress/Progress';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GithubContext } from '../../context/GithubConnect';
 import { useQueryClient } from '@tanstack/react-query';
+import GithubView from '../../pages/github/project/GithubView';
 
 export const RedirectGithubView: React.FC = () => {
     const codeRef = useRef('');

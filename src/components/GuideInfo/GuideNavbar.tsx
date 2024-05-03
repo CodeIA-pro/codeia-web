@@ -6,6 +6,8 @@ import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import SendIcon from '@mui/icons-material/Send';
 import GuideDialogSuggestion from './GuideDialogSuggestion';
 import GuideDialogComment from './GuideDialogComment';
+import Rating from '@mui/material/Rating';
+import { useStar } from '../../queries/useGuide';
 
 interface GuideNavbarProps {
     data: Asset;
@@ -15,7 +17,10 @@ interface GuideNavbarProps {
 const GuideNavbar: React.FC<GuideNavbarProps> = ({data, guideText}) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [openDialog, setOpenDialog] = useState(false);
+    const [flag, setFlag] = useState(false);
     const [openDialogComment, setOpenDialogComment] = useState(false);
+    const {mutate} = useStar();
+    const [star, setStar] = useState<number | null>(0);
 
     useEffect(() => {
         const timerId = setTimeout(() => {
@@ -33,6 +38,14 @@ const GuideNavbar: React.FC<GuideNavbarProps> = ({data, guideText}) => {
 
     const handleSearch = (event: any) => {
         setSearchTerm(event.target.value);
+        };
+
+    const handleStar = (value: number | null) => {
+            if(value){
+                setStar(value);
+                mutate({asset_id: data.id, star: value});
+                setFlag(true);
+            }
         };
 
     const filteredVersion = data && data.subsection 
@@ -75,7 +88,7 @@ const GuideNavbar: React.FC<GuideNavbarProps> = ({data, guideText}) => {
                         </Container>
                     </BasicFrame>
                     <BasicFrame isCentered={false} style={{backgroundColor:'#333131', display:'flex', flexDirection:'column', alignContent:'space-between' }}>
-                        <Container style={{padding:'1.5em', color:'#fff', display:'flex', flexDirection:'column', justifyItems:'center'}}>
+                        <Container style={{padding:'1.5em 1.5em 0 1.5em', color:'#fff', display:'flex', flexDirection:'column', justifyItems:'center'}}>
                             <Typography style={{ paddingBottom:'0.3em', color:'#7c98bd' }}>
                                 TABLE OF CONTENTS:
                             </Typography>
@@ -89,7 +102,7 @@ const GuideNavbar: React.FC<GuideNavbarProps> = ({data, guideText}) => {
                                 ))} 
                             </List>
                         </Container>
-                        <div style={{padding:'1.5em', color:'#fff', display:'flex', flexDirection:'column', justifyItems:'end', alignContent:'end'}}>
+                        <BasicFrame isCentered={false} className='flex-col justify-end item-end' style={{padding:'1.5em', color:'#fff'}}>
                             <Typography style={{ paddingBottom:'0.3em', color:'#7c98bd', textAlign:'start' }}>
                                 HELP US TO IMPROVE:
                             </Typography>
@@ -106,10 +119,34 @@ const GuideNavbar: React.FC<GuideNavbarProps> = ({data, guideText}) => {
                                 &nbsp;
                                 Send Comment
                             </Button>
-                        </div>
+                            <BasicFrame isCentered={false} className='flex-col justify-center items-start pt-7'>
+                                <Typography style={{color:'#fff', fontSize:'1em'}}>
+                                    <span style={{color:'#7c98bd'}}>ASSESSMENT:</span> <br></br>
+                                    <Rating
+                                        name="simple-controlled"
+                                        style={{fontSize:'1.2em'}}
+                                        disabled={flag}
+                                        value={star}
+                                        onChange={(event, newValue) => {
+                                            console.log(event);
+                                            handleStar(newValue);
+                                        }}
+                                    />
+                                </Typography>
+                                <Typography style={{color:'#fff', fontSize:'1em', paddingTop:'0.5em'}}>
+                                    <span style={{color:'#7c98bd'}}>STAR RATING:</span> <br></br>
+                                    <Rating name="read-only" 
+                                        readOnly 
+                                        style={{fontSize:'1.2em'}}
+                                        value={data?.star_average}
+                                        /> <span style={{fontSize:'0.8em', color:'#7c98bd'}}>  ({data?.start_quantity})</span>
+                                </Typography>
+                            </BasicFrame> 
+                        </BasicFrame>
                     </BasicFrame>
                     <GuideDialogSuggestion open={openDialog} onClose={handleClose} />
                     <GuideDialogComment open={openDialogComment} onClose={handleCloseComment} />
+
             </BasicFrame>);
     }
 
