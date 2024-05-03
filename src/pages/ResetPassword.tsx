@@ -39,34 +39,34 @@ const ResetPassword: React.FC = () => {
   return(
     <GenericFrame>
         <GenericPaper style={{width: '90vw', maxWidth: '560px', padding:'3em'}} className="flex flex-col justify-start items-start">
-        <Typography sx={{fontSize:'1.2em', textAlign: 'start', fontWeight:'700'}}>Ready to reset your password?</Typography>
-            <Typography sx={{fontSize:'1em', textAlign: 'start', fontWeight:'300'}}>Please enter your new password below and confirm it to complete the reset process.</Typography>
-              <TextField
-                  type="password"
-                  label="Password"
-                  margin="normal"
-                  sx={{marginTop: '1em',}}
-                  inputProps={{style: {fontSize: 13, fontWeight:'500'}}} // font size of input text
-                  onChange={(e) => validatePassword(e.target.value)}
-                  fullWidth
-                />
-              <TextField
-                  type="password"
-                  label="Confirm Password"
-                  margin="normal"
-                  sx={{marginTop: '1em',}}
-                  inputProps={{style: {fontSize: 13, fontWeight:'500'}}} // font size of input text
-                  onChange={(e) => validateConfirmPassword(e.target.value)}
-                  fullWidth
-                />
-                { (code === '' || confirmCode === '' || code == confirmCode) ? null : <Typography sx={{fontSize:'1em', textAlign: 'start', fontWeight:'300', color: 'red', }}>Passwords do not match</Typography>}
-            <ButtonValidateUI
-              text="Send"
-              disabled={!validate}
-              isLoading={isLoading}
-              style={{fontSize: '0.9em',  borderRadius: '0.7em', width: '100px', textTransform: 'none', backgroundColor:'#222f4e', color:'#fff', marginTop:'1em' , marginLeft:'0' }}
-              onClick={onSubmit}/>
-        </GenericPaper>
+          <Typography sx={{fontSize:'1.2em', textAlign: 'start', fontWeight:'700'}}>Ready to reset your password?</Typography>
+          <Typography sx={{fontSize:'1em', textAlign: 'start', fontWeight:'300'}}>Please enter your new password below and confirm it to complete the reset process.</Typography>
+          <TextField
+              type="password"
+              label="Password"
+              margin="normal"
+              sx={{marginTop: '1em',}}
+              inputProps={{style: {fontSize: 13, fontWeight:'500'}}} // font size of input text
+              onChange={(e) => validatePassword(e.target.value)}
+              fullWidth
+            />
+          <TextField
+              type="password"
+              label="Confirm Password"
+              margin="normal"
+              sx={{marginTop: '1em',}}
+              inputProps={{style: {fontSize: 13, fontWeight:'500'}}} // font size of input text
+              onChange={(e) => validateConfirmPassword(e.target.value)}
+              fullWidth
+            />
+            { (code === '' || confirmCode === '' || code == confirmCode) ? null : <Typography sx={{fontSize:'1em', textAlign: 'start', fontWeight:'300', color: 'red', }}>Passwords do not match</Typography>}
+        <ButtonValidateUI
+          text="Send"
+          disabled={!validate}
+          isLoading={isLoading}
+          style={{fontSize: '0.9em',  borderRadius: '0.7em', width: '100px', textTransform: 'none', backgroundColor:'#222f4e', color:'#fff', marginTop:'1em' , marginLeft:'0' }}
+          onClick={onSubmit}/>
+      </GenericPaper>
     </GenericFrame>
   );
 }

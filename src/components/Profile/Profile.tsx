@@ -21,11 +21,11 @@ const Profile: React.FC = () => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
+    const [openDialog, setOpenDialog] = useState(false);
 
     const email_data = email !== '' && data && email !== data?.email && !validateEmail(email);
     const name_data = name !== '' && data && name !== data?.name;
     const surname_data = surname !== '' && data && surname !== data?.surname;
-    const [openDialog, setOpenDialog] = useState(false);
     
     const handleOpen = () => setOpenDialog(true);
     const handleClose = () => setOpenDialog(false);

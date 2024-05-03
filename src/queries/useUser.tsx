@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { twoFactorChange, updateUser, user } from "../api/userApi";
-import { User } from "../interfaces/user/user.interface";
+import { changePassword, twoFactorChange, updateUser, user } from "../api/userApi";
+import { ChangePassword, User } from "../interfaces/user/user.interface";
 import { useAuthStore } from "../store";
 import { useNotification } from "../hooks/useNotification";
 
@@ -40,6 +40,21 @@ export const useTwoFactorChange = () => {
             queryClient.resetQueries(['user']);
             getSuccess('Two factor authentication updated');
         } 
+    });
+    return info;
+}
+
+export const useChangePassword = () => {
+    const {getSuccess, getError} = useNotification();
+    const info = useMutation({
+        mutationFn:(data: ChangePassword) => changePassword(data),
+        onSuccess: (data) => {
+            if(data && data.status && data.message){
+                getSuccess(data.message);
+            }else if (data && data.message){
+                getError(data.message);   
+            }
+        }
     });
     return info;
 }

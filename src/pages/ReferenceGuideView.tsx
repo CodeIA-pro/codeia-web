@@ -13,7 +13,6 @@ import GuideInfo from "../components/Guide/GuideInfo";
 import NotFound from "./NotFound";
 import GuideDialog from "../components/Guide/GuideDialog";
 import { useGenerateGuide } from "../queries/useProject";
-//import { convertTimestampToDate } from "../utils/filtered";
 
 const ReferenceGuideView: React.FC = () => {
     const params = useParams();
@@ -22,7 +21,6 @@ const ReferenceGuideView: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [generation, setGeneration] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
-
 
     useEffect(() => {
         if (!data?.is_Loading && !isLoadingGuide) {
@@ -41,7 +39,7 @@ const ReferenceGuideView: React.FC = () => {
     const handleSave = (data: string) => {
         console.log(data);
         setGeneration(true);
-      };
+    };
 
     const is_valid_url = (params.project as string !== undefined && params.owner as string !== undefined);
     const root = params.project as string + '/' + params.name as string; 

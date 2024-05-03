@@ -17,16 +17,26 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { updatePermission, userProfileUrl } from "../utils/github";
 import { convertTimestampToDate } from "../utils/filtered";
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { useNotification } from "../hooks/useNotification";
+import { useQueryClient } from "@tanstack/react-query";
 
 const GithubView: React.FC = () => {
+    const queryClient = useQueryClient();
     const {isLoading: isLoadUser, data: user = {} as UserGithub } = useGithubUser();
     const {isLoading: isLoadProjects, dataUpdatedAt , data:projects = {} as ProjectGithub} = useGithubProjects();
+    const {getSuccess} = useNotification();
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearch = (term: string) => {
         const searchTerm = term.trim().toLowerCase();
         setSearchTerm(searchTerm);
     };
+
+    const handleRefresh = () => {
+        queryClient.resetQueries(['github-projects']);
+        getSuccess('Github repositories refreshed');
+    }
     
     return (
         <GenericFrame isCentered={false} className="items-start justify-center">
@@ -41,6 +51,10 @@ const GithubView: React.FC = () => {
                     <GenericPaper style={{height: '530px', width: '90vw', maxWidth: '860px'}}>
                         <Box className="mb-4 flex items-start place-content-between">
                             <Typography variant="body1" className="text-base font-normal">Connect a GitHub repository</Typography>
+                            <Button onClick={() => handleRefresh()} className="flex items-center" style={{backgroundColor:'#fff', textTransform: 'none', padding:'0'}}>
+                                    <Typography variant="caption" className="text-xl mr-1">Refresh</Typography>
+                                    <RefreshIcon style={{height:'0.78em', width:'0.7em', color: '#1e2f50', marginLeft:'5px'}}/>
+                            </Button>
                         </Box>
                         <Search searchTerm={searchTerm} onSearch={handleSearch}/>
                         <GenericPaper className="mt-4" style={{padding:'0.5em', height: '75%'}}>

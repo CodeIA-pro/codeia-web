@@ -21,6 +21,11 @@ export interface User {
     status?: boolean
     user_github?: string
 }
+
+export interface ChangePassword {
+    password: string
+    new_password: string
+}
   
 export interface RegisterResponse {
     name: string

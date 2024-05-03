@@ -12,10 +12,15 @@ import { useProjects } from "../queries/useProject";
 import ProjectList from "../components/Project/ProjectList";
 import { Project } from "../interfaces/project/projects.interface";
 import DialogProject from "../components/Project/ProjectDialog";
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { useNotification } from "../hooks/useNotification";
+import { useQueryClient } from "@tanstack/react-query";
 
 const ProjectView: React.FC = () => {
+    const queryClient = useQueryClient(); 
     const {isLoading, data = {} as Project} = useProjects(); 
     const [searchTerm, setSearchTerm] = useState('');
+    const {getSuccess} = useNotification();
     const [openDialog, setOpenDialog] = useState(false);
 
     const handleOpen = () => setOpenDialog(true);
@@ -25,6 +30,11 @@ const ProjectView: React.FC = () => {
         const searchTerm = term.trim().toLowerCase();
         setSearchTerm(searchTerm);
     };
+
+    const handleRefresh = () => {
+        queryClient.resetQueries(['projects-repo']);
+        getSuccess('Projects refreshed');
+    }
 
     return (
         <GenericFrame isCentered={false} className="items-start justify-center">
@@ -39,10 +49,17 @@ const ProjectView: React.FC = () => {
                     <GenericPaper style={{height: '530px', width: '90vw', maxWidth: '860px'}}>
                         <Box className="mb-4 flex items-start place-content-between">
                             <Typography variant="body1" className="text-base font-normal">Workspaces created</Typography>
-                            <Button onClick={handleOpen} className="flex items-center" style={{backgroundColor:'#fff', textTransform: 'none', padding:'0'}}>
-                                <Typography variant="caption" className="text-xl mr-1">Add a workspace</Typography>
-                                <AddCircleIcon style={{height:'0.78em', width:'0.7em', color: '#1e2f50', marginLeft:'8px'}}/>
-                            </Button>
+                            <Box>
+                                <Button onClick={() => handleRefresh()} className="flex items-center" style={{backgroundColor:'#fff', textTransform: 'none', padding:'0'}}>
+                                    <Typography variant="caption" className="text-xl mr-1">Refresh</Typography>
+                                    <RefreshIcon style={{height:'0.78em', width:'0.7em', color: '#1e2f50', marginLeft:'5px'}}/>
+                                </Button>
+
+                                <Button onClick={handleOpen} className="flex items-center ml-10" style={{backgroundColor:'#fff', textTransform: 'none', padding:'0', marginLeft:'10px'}}>
+                                    <Typography variant="caption" className="text-xl mr-1">Add a workspace</Typography>
+                                    <AddCircleIcon style={{height:'0.78em', width:'0.7em', color: '#1e2f50', marginLeft:'8px'}}/>
+                                </Button>
+                            </Box>
                         </Box>
                         <Search searchTerm={searchTerm} onSearch={handleSearch}/>
                         <GenericPaper className="mt-4" style={{padding:'0.5em', height: '75%'}}>

@@ -4,11 +4,16 @@ import { BasicFrame } from "../../common/Frame/BasicFrame";
 import SwitchUI from "../../common/Switch/Switch";
 import { useEffect, useState } from "react";
 import { useTwoFactorChange, useUser } from "../../queries/useUser";
+import SecurityDialog from "./SecurityDialog";
 
 const Security: React.FC = () => {
     const {isLoading, data} = useUser();
     const [checked, setChecked] = useState(false);
     const {isLoading: change, mutate} = useTwoFactorChange();
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleOpen = () => setOpenDialog(true);
+    const handleClose = () => setOpenDialog(false);
 
     useEffect(() => {
         if(data && data.two_factor){
@@ -31,7 +36,7 @@ const Security: React.FC = () => {
             <BasicFrame isCentered={false} className="items-start flex-col">
                 <BasicFrame isCentered={false} className="items-center justify-between mb-6 w-full">
                     <Typography style={{fontSize:'0.7em', fontWeight:'400'}}>Password</Typography>
-                    <Button disabled={isLoading} variant="outlined" style={{textTransform:'none', fontSize:'0.65em',}}>Change Password</Button>
+                    <Button onClick={handleOpen} disabled={isLoading} variant="outlined" style={{textTransform:'none', fontSize:'0.65em',}}>Change Password</Button>
                 </BasicFrame>
 
                 <BasicFrame isCentered={false} className="items-center justify-between mb-2 w-full">
@@ -62,6 +67,7 @@ const Security: React.FC = () => {
                     </Box>
                 </BasicFrame>
             </BasicFrame>
+            <SecurityDialog open={openDialog} onClose={handleClose}/>
         </GenericPaper>
     );
 }
