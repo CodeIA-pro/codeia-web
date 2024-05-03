@@ -52,9 +52,9 @@ export const NavBar: React.FC = () => {
                             </Grid>
 
                             <Grid item style={{display: 'flex', justifyContent: 'center', alignItems:'center'}}>
+                                <Typography onClick={() => navigate('/')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Home </Typography>
                                 { !user ?
                                     <Fragment>
-                                        <Typography onClick={() => navigate('/')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Home </Typography>
                                         <Typography onClick={() => navigate('/#feature')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Features </Typography>
                                         <Typography onClick={() => navigate('/pricing')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Plans </Typography>
                                     </Fragment>
