@@ -1,10 +1,12 @@
+import { Fragment, useState } from "react";
 import { Box, Button, CircularProgress, Divider, TextField, Typography } from "@mui/material";
 import GenericPaper from "../../common/Container/GenericPaper";
 import { BasicFrame } from "../../common/Frame/BasicFrame";
-import { useState } from "react";
 import { useUpdateUser, useUser } from "../../queries/useUser";
 import Progress from "../../common/Progress/Progress";
 import { validateEmail } from "../../utils/filtered";
+import ProfileGithubDialog from "./ProfileGithubDialog";
+import { loginWithGithub } from "../../utils/github";
 
 interface Profile {
     email?: string;
@@ -23,15 +25,17 @@ const Profile: React.FC = () => {
     const email_data = email !== '' && data && email !== data?.email && !validateEmail(email);
     const name_data = name !== '' && data && name !== data?.name;
     const surname_data = surname !== '' && data && surname !== data?.surname;
-
+    const [openDialog, setOpenDialog] = useState(false);
+    
+    const handleOpen = () => setOpenDialog(true);
+    const handleClose = () => setOpenDialog(false);
+    
     const check = () =>  !(email_data || name_data || surname_data);
-
     const handleSaveChanges = () => {
         const user: Profile = {};
         if(email_data) user.email = email;
         if(name_data) user.name = name;
         if(surname_data) user.surname = surname;
-        console.log(user);
         mutate(user);
     }
 
@@ -81,8 +85,16 @@ const Profile: React.FC = () => {
                     <BasicFrame isCentered={false} className="items-center justify-center mb-6">
                         <Typography style={{fontSize:'0.65em', fontWeight:'400', color:'#7d8fb1'}}>GITHUB LOGIN</Typography>
                         <Box className="flex" sx={{marginLeft: '4.5em'}}>
-                            <Typography style={{fontSize:'0.8em', fontWeight:'400', marginRight:'16px'}}>ShoLee01</Typography>
-                            <Button variant="outlined" style={{textTransform:'none', fontSize:'0.65em', padding:'1px 15px' }}>Disconnect</Button>
+                            {   data?.repo_login ?
+                                <Fragment>
+                                    <Typography style={{fontSize:'0.8em', fontWeight:'400', marginRight:'16px'}}>ShoLee01</Typography>
+                                    <Button onClick={handleOpen} variant="outlined" style={{textTransform:'none', fontSize:'0.65em', padding:'1px 15px' }}>Disconnect</Button>
+                                </Fragment>
+                                :
+                                <Fragment>
+                                    <Button onClick={loginWithGithub} variant="outlined" style={{textTransform:'none', fontSize:'0.65em', padding:'1px 15px' }}>Connect</Button>
+                                </Fragment> 
+                            }
                         </Box>
                     </BasicFrame>
 
@@ -173,6 +185,7 @@ const Profile: React.FC = () => {
                     </BasicFrame>
                 </BasicFrame>
             }
+            <ProfileGithubDialog open={openDialog} onClose={handleClose} />
         </GenericPaper>
     );
 }

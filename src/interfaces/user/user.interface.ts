@@ -8,7 +8,7 @@ export interface UserResponse {
     repo_login: boolean
     status: boolean
     two_factor: boolean
-  }
+}
 
 export interface User {
     email?: string
@@ -17,6 +17,9 @@ export interface User {
     surname?: string
     two_factor?: boolean
     repo_login?: boolean
+    message?: string
+    status?: boolean
+    user_github?: string
 }
   
 export interface RegisterResponse {

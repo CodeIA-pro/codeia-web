@@ -53,3 +53,9 @@ export const generateReferenceGuide = async (data: GenerateReferenceGuide): Prom
   const response = await axios.post(API_URL + 'project/guide-reference/', data, { headers });
   return response.data;
 }
+
+export const unlinkGithub = async (): Promise<Connect> => {
+  const headers = getAuthorizationHeaders();
+  const response = await axios.post(API_URL + 'project/unlink-repo/', {} ,{ headers });
+  return response.data;
+}

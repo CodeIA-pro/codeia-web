@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { changeProyect, createProject, generateReferenceGuide, projectByName, projectItem, projectsList, updateProject, verifyProjectName } from "../api/project";
+import { changeProyect, createProject, generateReferenceGuide, projectByName, projectItem, projectsList, unlinkGithub, updateProject, verifyProjectName } from "../api/project";
 import { useNotification } from "../hooks/useNotification";
 import { sortDataDesc } from "../utils/filtered";
 import { useNavigate } from "react-router-dom";
@@ -55,6 +55,23 @@ export const useCreateProject = () => {
       },
       onError: () => {
         getError('Error creating project');
+      }
+    });
+  return info;
+}
+
+
+export const useUnlinkGithub = () => {
+  const queryClient = useQueryClient();
+  const {getSuccess, getError} = useNotification();
+  const info = useMutation({
+      mutationFn: unlinkGithub,
+      onSuccess: () => {
+        queryClient.resetQueries(['user']);
+        getSuccess('Github unlinked successfully');
+      },
+      onError: () => {
+        getError('Error unlinking github');
       }
     });
   return info;
