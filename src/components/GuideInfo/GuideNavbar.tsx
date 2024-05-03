@@ -4,6 +4,8 @@ import { BasicFrame } from '../../common/Frame/BasicFrame';
 import { Button, Container, List, ListItem, TextField, Typography } from '@mui/material';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import SendIcon from '@mui/icons-material/Send';
+import GuideDialogSuggestion from './GuideDialogSuggestion';
+import GuideDialogComment from './GuideDialogComment';
 
 interface GuideNavbarProps {
     data: Asset;
@@ -12,6 +14,8 @@ interface GuideNavbarProps {
   
 const GuideNavbar: React.FC<GuideNavbarProps> = ({data, guideText}) => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [openDialog, setOpenDialog] = useState(false);
+    const [openDialogComment, setOpenDialogComment] = useState(false);
 
     useEffect(() => {
         const timerId = setTimeout(() => {
@@ -21,13 +25,15 @@ const GuideNavbar: React.FC<GuideNavbarProps> = ({data, guideText}) => {
 
       }, [searchTerm]);
 
+    const handleOpen = () => setOpenDialog(true);
+    const handleClose = () => setOpenDialog(false);
+
+    const handleOpenComment = () => setOpenDialogComment(true);
+    const handleCloseComment = () => setOpenDialogComment(false);
+
     const handleSearch = (event: any) => {
         setSearchTerm(event.target.value);
         };
-
-    const hableClick = () => {
-        console.log(data);
-    }
 
     const filteredVersion = data && data.subsection 
         ? (searchTerm === '') ? data.subsection : 
@@ -90,13 +96,20 @@ const GuideNavbar: React.FC<GuideNavbarProps> = ({data, guideText}) => {
                             <Typography style={{ paddingBottom:'0.3em', color:'#fff', textAlign:'start' }}>
                                 Was this guide helpful?
                             </Typography>
-                            <Button onClick={hableClick} style={{ paddingBottom:'0.3em', color:'#fff' , display:'flex', alignItems:'center', cursor:'pointer'}}>
+                            <Button onClick={handleOpen} style={{marginTop:'0.3em', backgroundColor:'#333131', padding:'0', color:'#fff' , display:'flex', alignItems:'center', cursor:'pointer', width:'150px'}}>
                                 <SendIcon style={{ fontSize:'1em', color:'#fff'}}/>
                                 &nbsp;
                                 Send feedback
                             </Button>
+                            <Button onClick={handleOpenComment} style={{marginTop:'0.3em', backgroundColor:'#333131', padding:'0', color:'#fff' , display:'flex', alignItems:'center', cursor:'pointer', width:'152px'}}>
+                                <SendIcon style={{ fontSize:'1em', color:'#fff'}}/>
+                                &nbsp;
+                                Send Comment
+                            </Button>
                         </div>
                     </BasicFrame>
+                    <GuideDialogSuggestion open={openDialog} onClose={handleClose} />
+                    <GuideDialogComment open={openDialogComment} onClose={handleCloseComment} />
             </BasicFrame>);
     }
 

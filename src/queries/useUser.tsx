@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { changePassword, twoFactorChange, updateUser, user } from "../api/userApi";
+import { changePassword, twoFactorChange, updateUser, user } from "../api/user";
 import { ChangePassword, User } from "../interfaces/user/user.interface";
 import { useAuthStore } from "../store";
 import { useNotification } from "../hooks/useNotification";
