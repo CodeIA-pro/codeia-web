@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { GenericFrame } from "../../../common/Frame/GenericFrame";
 import { BasicFrame } from "../../../common/Frame/BasicFrame";
-import { FormGroup, TextField, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { useLogin } from "../../../queries/useAuth";
 import { LoginRequest } from "../../../interfaces/auth/auth.interface";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +34,7 @@ const LoginView: React.FC = () => {
         >
           Log In
         </Typography>
-        <FormGroup className="w-full">
+        <form className="w-full">
           <TextField
             fullWidth
             type="email"
@@ -60,10 +60,11 @@ const LoginView: React.FC = () => {
           <ButtonUI
               text="Log In"
               isLoading={isLoading}
+              className="w-full"
               onClick={handleSubmit(onSubmit)}/>
           <Typography sx={{color: '#222f4e', mt: 1, textAlign: 'center', cursor:'pointer'}} 
             onClick={() => navigate('/forgot-password')}>Forgot your password?</Typography>
-        </FormGroup>
+        </form>
       </BasicFrame>
     </GenericFrame>
   );

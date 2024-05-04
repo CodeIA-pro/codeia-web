@@ -4,6 +4,7 @@ import { Box, Typography } from "@mui/material";
 import Profile from "../../../components/Profile/Profile";
 import Sidebar from "../../../components/Profile/Sidebar";
 import Security from '../../../components/Profile/Security';
+import PlanSubscription from "../../../components/Profile/Plan";
 
 const ProfileView: React.FC = () => {
     return (
@@ -18,6 +19,8 @@ const ProfileView: React.FC = () => {
                         <Profile/>
                         <Box marginBottom={4}/>
                         <Security/>
+                        <Box marginBottom={4}/>
+                        <PlanSubscription/>
                     </BasicFrame>
                 </BasicFrame>
             </BasicFrame>

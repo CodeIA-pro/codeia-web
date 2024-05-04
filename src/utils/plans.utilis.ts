@@ -1,5 +1,6 @@
 const Plans = [
     {
+        id: 1,
         plan_title: 'CodeIA Basic',
         subtitle: 'Basic API documentation',
         plan: 'Free',
@@ -11,6 +12,7 @@ const Plans = [
         className: ''
     },
     {
+        id: 2,
         plan_title: 'CodeIA Pro',
         subtitle: 'Next-level API docs',
         plan: 'Contact us',
@@ -22,6 +24,7 @@ const Plans = [
         className: 'cardWithAnimatedBorder'
     },
     {
+        id: 3,
         plan_title: 'CodeIA Enterprise',
         subtitle: 'Unlimited API docs power',
         plan: 'Contact us',
