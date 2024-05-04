@@ -8,6 +8,8 @@ export interface PlanItems {
     plan_description_three: string;
     button_title: string;
     color: string;
+    link: string;
+    feature: string;
     className: string;
 }
 

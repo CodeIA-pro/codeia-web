@@ -2,6 +2,7 @@ import { Button, Card } from "@mui/material";
 import { BasicFrame } from "../../common/Frame/BasicFrame";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { PlanItems } from "../../interfaces/plan/plan-item.interface";
+import { useNavigate } from "react-router-dom";
   
 interface PlansProps {
     style?: React.CSSProperties;
@@ -10,6 +11,7 @@ interface PlansProps {
 }
 
 const PlanItem: React.FC<PlansProps> = ({style, className, data}) => {
+    const navigate = useNavigate();
     return (
             <Card className={`flex items-start justify-between flex-col ${className ? className || '' : ''}`}
                 sx={{ 
@@ -38,7 +40,7 @@ const PlanItem: React.FC<PlansProps> = ({style, className, data}) => {
                         <span style={{fontSize:'0.9em', fontWeight:'300'}} className="text-white ml-2">{data.plan_description_three}</span>
                     </BasicFrame>
                 </BasicFrame>
-                <Button variant="contained" className="w-full" style={{backgroundColor: `${data.color}`, color: '#F5F5DC', padding: '0.5em 1.5em', textTransform: 'none', borderRadius:'.5rem'}}>
+                <Button onClick={() => (navigate(`${data.link}/${data.feature} `))} variant="contained" className="w-full" style={{backgroundColor: `${data.color}`, color: '#F5F5DC', padding: '0.5em 1.5em', textTransform: 'none', borderRadius:'.5rem'}}>
                     {data.button_title}
                 </Button>
             </Card>

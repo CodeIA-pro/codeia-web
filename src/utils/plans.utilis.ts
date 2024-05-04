@@ -9,6 +9,8 @@ const Plans = [
         plan_description_three: 'Up to 3 guide versions',
         button_title: 'Start Free Trial',
         color: '#5a7fe7',
+        link: '/register',
+        feature: '',
         className: ''
     },
     {
@@ -21,6 +23,8 @@ const Plans = [
         plan_description_three: 'Up to 10 guide versions',
         button_title: 'Start CodeIA Pro',
         color: '#5a7fe7',
+        link: '/pricing',
+        feature: '#contact-us',
         className: 'cardWithAnimatedBorder'
     },
     {
@@ -33,6 +37,8 @@ const Plans = [
         plan_description_three: 'Unlimited guide versions',
         button_title: 'Start CodeIA Infinity',
         color: '#6a66fc',
+        link: '/pricing',
+        feature: '#contact-us',
         className: 'cardPricing'
     }
 ]

@@ -52,6 +52,16 @@ body {
     background-origin: border-box;
     background-clip: padding-box, border-box;
   }
+
+  .contactUs {
+    background-color: #fff;
+    border-radius: 16px;
+    --border-size: 0.3rem;
+    border: var(--border-size) dotted transparent;
+    background-image: linear-gradient(to right, #10171e, #10171e),  conic-gradient(from var(--angle), #f4f4f4  0deg 90deg, #131d32 90deg 180deg, #f4f4f4 180deg 270deg, #131d32 270deg 360deg);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
   
   .buttonClicked {
     overflow: hidden;
@@ -117,7 +127,8 @@ body {
     }
     
     .cardBasic,
-    .cardPricing {
+    .cardPricing,
+    .contactUs {
       animation: rotate 4s linear infinite, opacityChange 3s infinite alternate;
     }
   
@@ -148,13 +159,11 @@ body {
   .enterprices {
     background: -webkit-linear-gradient(to right, #00ccff, #d500f9);
     background: linear-gradient(to right, #00ccff, #d500f9);
-    -webkit-background-clip: text; /* Esto asegura que el gradiente se aplique dentro del texto */
-    background-clip: text; /* Esto asegura que el gradiente se aplique dentro del texto */
-    color: transparent; /* Esto hace que el texto sea transparente */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
   
-  
-
   @media (max-width: 1500px) {
     .cardWithAnimatedBorderTwo,
     .cardWithAnimatedBorder {

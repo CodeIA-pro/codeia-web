@@ -56,7 +56,7 @@ export const NavBar: React.FC = () => {
                                 { !user ?
                                     <Fragment>
                                         <Typography onClick={() => navigate('/#feature')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Features </Typography>
-                                        <Typography onClick={() => navigate('/pricing')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Plans </Typography>
+                                        <Typography onClick={() => navigate('/pricing/#plans')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Plans </Typography>
                                     </Fragment>
                                     : <div></div>
                                 }
