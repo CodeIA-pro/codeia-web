@@ -71,7 +71,7 @@ const Profile: React.FC = () => {
                                 }}
                                 />
                                 :
-                                <Typography style={{fontSize:'0.8em', fontWeight:'400', marginRight:'16px'}}> miguelalfaro2017@gmail.com</Typography>
+                                <Typography style={{fontSize:'0.8em', fontWeight:'400', marginRight:'16px'}}> {data?.email}</Typography>
                             }
                             {
                                 isEditing ?
@@ -87,7 +87,7 @@ const Profile: React.FC = () => {
                         <Box className="flex" sx={{marginLeft: '4.5em'}}>
                             {   data?.repo_login ?
                                 <Fragment>
-                                    <Typography style={{fontSize:'0.8em', fontWeight:'400', marginRight:'16px'}}>ShoLee01</Typography>
+                                    <Typography style={{fontSize:'0.8em', fontWeight:'400', marginRight:'16px'}}>{data.user_github}</Typography>
                                     <Button onClick={handleOpen} variant="outlined" style={{textTransform:'none', fontSize:'0.65em', padding:'1px 15px' }}>Disconnect</Button>
                                 </Fragment>
                                 :
