@@ -44,6 +44,10 @@ export function sortDataDesc(data:any) {
   return sortedData;
 }
 
+export function transformDate(date: string): string {
+  return date.split('T')[0].split('-').reverse().join('/');
+}
+
 export function convertTimestampToDate(timestamp: number): string {
   const date = new Date(timestamp);
   const hours = String(date.getHours()).padStart(2, '0');

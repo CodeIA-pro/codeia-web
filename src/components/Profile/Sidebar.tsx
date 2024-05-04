@@ -9,6 +9,9 @@ const Sidebar: React.FC = () => {
             <BasicFrame isCentered={false} style={{width:'168px', padding: '8px 14px'}} className="items-start justify-start">
                 <span>Security</span>
             </BasicFrame>
+            <BasicFrame isCentered={false} style={{width:'168px', padding: '8px 14px'}} className="items-start justify-start">
+                <span>My Plan</span>
+            </BasicFrame>
         </BasicFrame>
     );
 }

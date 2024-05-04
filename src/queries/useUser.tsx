@@ -53,6 +53,8 @@ export const useChangePassword = () => {
                 getSuccess(data.message);
             }else if (data && data.message){
                 getError(data.message);   
+            }else{
+                getError('Error updating password');
             }
         }
     });
