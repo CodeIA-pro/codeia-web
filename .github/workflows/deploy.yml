@@ -36,9 +36,3 @@ jobs:
     - name: Copy files to S3 bucket
       run: |
         aws s3 sync dist/ s3://${{ secrets.BUCKET }} --delete
-
-    - name: Create invalidation for cloudfront deploy
-      run: |
-        aws cloudfront create-invalidation \
-          --distribution-id ${{ secrets.DIST_ID }} \
-          --paths "/*"
