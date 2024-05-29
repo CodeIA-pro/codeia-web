@@ -52,7 +52,7 @@ const GithubView: React.FC = () => {
                         <Box className="mb-4 flex items-start place-content-between">
                             <Typography variant="body1" className="text-base font-normal">Connect a GitHub repository</Typography>
                             <Button onClick={() => handleRefresh()} className="flex items-center" style={{backgroundColor:'#fff', textTransform: 'none', padding:'0'}}>
-                                    <Typography variant="caption" className="text-xl mr-1">Refresh</Typography>
+                                    <Typography variant="caption" className="mr-1">Refresh</Typography>
                                     <RefreshIcon style={{height:'0.78em', width:'0.7em', color: '#1e2f50', marginLeft:'5px'}}/>
                             </Button>
                         </Box>
