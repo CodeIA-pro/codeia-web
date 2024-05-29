@@ -49,14 +49,14 @@ const ProjectView: React.FC = () => {
                     <GenericPaper style={{height: '530px', width: '90vw', maxWidth: '860px'}}>
                         <Box className="mb-4 flex items-start place-content-between">
                             <Typography variant="body1" className="text-base font-normal">Workspaces created</Typography>
-                            <Box>
+                            <Box  className="flex">
                                 <Button onClick={() => handleRefresh()} className="flex items-center" style={{backgroundColor:'#fff', textTransform: 'none', padding:'0'}}>
-                                    <Typography variant="caption" className="text-xl mr-1">Refresh</Typography>
+                                    <Typography variant="caption" className="mr-1">Refresh</Typography>
                                     <RefreshIcon style={{height:'0.78em', width:'0.7em', color: '#1e2f50', marginLeft:'5px'}}/>
                                 </Button>
 
                                 <Button onClick={handleOpen} className="flex items-center ml-10" style={{backgroundColor:'#fff', textTransform: 'none', padding:'0', marginLeft:'10px'}}>
-                                    <Typography variant="caption" className="text-xl mr-1">Add a workspace</Typography>
+                                    <Typography variant="caption" className="mr-1">Add a workspace</Typography>
                                     <AddCircleIcon style={{height:'0.78em', width:'0.7em', color: '#1e2f50', marginLeft:'8px'}}/>
                                 </Button>
                             </Box>
