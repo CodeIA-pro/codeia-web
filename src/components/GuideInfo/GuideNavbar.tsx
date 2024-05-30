@@ -9,8 +9,6 @@ import GuideDialogComment from './GuideDialogComment';
 import Rating from '@mui/material/Rating';
 import { useStar } from '../../queries/useGuide';
 
-import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
-
 interface GuideNavbarProps {
     data: Asset;
     guideText: (text: string) => void;
@@ -55,7 +53,7 @@ const GuideNavbar: React.FC<GuideNavbarProps> = ({data, guideText}) => {
         data.subsection.filter((item: Asset) => item.description.toLowerCase().includes(searchTerm.toLowerCase())) : []; 
 
     return (
-            <BasicFrame isCentered={false}  className='absolute left-0 flex flex-col md:static md:justify-start
+            <BasicFrame isCentered={false}  className='absolute left-0 flex flex-col md:static md:justify-start 
                 w-full md:w-96' style={{width: '400px',backgroundColor:'#333131' }} >
                     <BasicFrame  style={{ height:'160px', backgroundColor:'#517daf' }}>
                         <Container style={{display:'flex', flexDirection:'column', justifyItems:'center', alignItems:'center', padding:0, }}>

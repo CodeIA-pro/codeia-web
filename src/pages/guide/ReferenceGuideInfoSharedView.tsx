@@ -40,18 +40,18 @@ const ReferenceGuideInfoSharedView: React.FC = () => {
                 <Progress/> 
             </GenericFrame>)
             : (data && data?.subsection.length > 0) ? (
-            <BasicFrame isCentered={false} className='min-h-screen w-full' style={{ overflowY:'visible', paddingBottom:'0'}}>
+            <BasicFrame isCentered={false} className='pb-0 min-h-screen w-full' style={{ overflowY:'visible', paddingBottom:'0'}}>
                 {
                     burgerActive 
                     ? 
                         <>
-                            <div className='absolute left-4 top-20 h-12 w-12 flex rounded-3xl items-center justify-center'>
+                            <div className='absolute left-4 top-5 h-12 w-12 flex rounded-3xl items-center justify-center'>
                                 <KeyboardDoubleArrowLeftIcon onClick={toggleBurger} className='text-white left-2 top-22 h-8 w-8 z-10'/>
                             </div>
                             <GuideNavbar guideText={setSearchTerm} data={data}/>
                         </>
                     : 
-                    <div className='absolute left-4 top-20 h-12 w-12 flex rounded-3xl items-center justify-center' style={{ backgroundColor:'#517daf'}}>
+                    <div className='absolute left-4 top-5 h-12 w-12 flex rounded-3xl items-center justify-center' style={{ backgroundColor:'#517daf'}}>
                         <KeyboardDoubleArrowRightIcon onClick={toggleBurger} className='relative text-white top-0 w-16'/>
                     </div>
                 }

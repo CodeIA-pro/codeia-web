@@ -40,7 +40,7 @@ const ReferenceGuideInfoView: React.FC = () => {
                 <Progress/> 
             </GenericFrame>)
             : (data && data?.subsection.length > 0) ? (
-            <GenericFrame isCentered={false} style={{ display: 'flex', flexDirection: 'row', overflowY:'visible', paddingBottom:'0' }}>
+            <GenericFrame isCentered={false} className='pb-0' style={{ display: 'flex', flexDirection: 'row', overflowY:'visible' }}>
                 {
                     burgerActive 
                     ? 
