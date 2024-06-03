@@ -33,6 +33,7 @@ export interface Asset {
     short_sha:        string;
     length:           number;
     star_average:     number;
+    theme:            string;
     start_quantity:   number;
 }
 
@@ -48,6 +49,12 @@ export interface PrivacyResponse {
     privacy: string;
     project_id: number;
     asset_id: number;
+}
+
+export interface PDF {
+    project_id: number;
+    asset_id: number;
+    title: string;
 }
 
 export interface Star {

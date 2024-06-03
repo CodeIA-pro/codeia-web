@@ -94,7 +94,7 @@ const DialogProject: React.FC<DialogProps> = ({ open, onClose }) => {
                         multiline // Habilita el comportamiento de área de texto
                         rows={3}  // Define el número de filas visibles
                         autoComplete="description"
-                        {...register("description", {})}
+                        {...register("description", { required: "Description is required" })}
                         error={!!errors.description}
                         helperText={errors.description?.message}
                     />
@@ -105,9 +105,9 @@ const DialogProject: React.FC<DialogProps> = ({ open, onClose }) => {
                     <Button onClick={closeDialog} style={{fontSize: '0.8em', borderRadius: '0.7em', width: '90px', textTransform: 'none', backgroundColor:'#222f4e', color:'#fff' }}>Cancelar</Button>
                     <Button 
                       onClick={handleSubmit(handleSave)}  
-                      disabled={ name === '' || !response || response?.status && !isLoading || isLoading}
+                      disabled={ !response || response?.status && !isLoading || isLoading}
                       sx={{
-                        opacity: (name === '' || !response || response?.status && !isLoading || isLoading) ? 0.5 : 1, // Reduce la opacidad cuando no está seleccionado
+                        opacity: (!response || response?.status && !isLoading || isLoading) ? 0.5 : 1, // Reduce la opacidad cuando no está seleccionado
                         '&:disabled': {
                         backgroundColor: 'grey', // Cambia el color de fondo cuando está deshabilitado
                         },

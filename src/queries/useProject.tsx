@@ -104,7 +104,8 @@ export const useChangeProject = () => {
         navigate('/projects');
         getSuccess('Project changed successfully');
       },
-      onError: () => {
+      onError: (error) => {
+        console.log(error);
         getError('Error changing project');
       }
     });

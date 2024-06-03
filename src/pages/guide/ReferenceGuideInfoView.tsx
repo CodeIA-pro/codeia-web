@@ -16,7 +16,7 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 const ReferenceGuideInfoView: React.FC = () => {
     const params = useParams();
     const [searchTerm, setSearchTerm] = useState(Welcome);
-    const { isLoading, data} =useGuideVersionProject(params.owner as string, params.project as string, params.version as string);
+    const { isLoading, data} = useGuideVersionProject(params.owner as string, params.project as string, params.version as string);
     const { width } = useWindowSize();
     
     const [burgerActive, setBurgerActive] = useState(false);
@@ -40,7 +40,7 @@ const ReferenceGuideInfoView: React.FC = () => {
                 <Progress/> 
             </GenericFrame>)
             : (data && data?.subsection.length > 0) ? (
-            <GenericFrame isCentered={false} className='pb-0' style={{ display: 'flex', flexDirection: 'row', overflowY:'visible' }}>
+            <BasicFrame isCentered={false} className='pt-16 min-h-screen w-full' style={{ display: 'flex', flexDirection: 'row', overflowY:'visible' }}>
                 {
                     burgerActive 
                     ? 
@@ -55,10 +55,10 @@ const ReferenceGuideInfoView: React.FC = () => {
                         <KeyboardDoubleArrowRightIcon onClick={toggleBurger} className='relative text-white top-0 w-16'/>
                     </div>
                 }
-                <BasicFrame className='markdown-container pl-16 pr-16 md:pl-16 py-16' style={{ boxSizing: "border-box", margin:0, overflowY:'auto', width: '100%'}}>
+                <BasicFrame className={`markdown-container pl-32 md:px-16 md:py-16 ${data.theme == "Dark" ? 'bg-dark-codeia text-slate-100' : ''}`} style={{ boxSizing: "border-box", margin:0, overflowY:'auto', width: '100%'}}>
                     <Markdown markdownText={searchTerm}/>
                 </BasicFrame>
-            </GenericFrame>
+            </BasicFrame>
             ):(<NotFound root={''} />)}
         </Fragment>
     );

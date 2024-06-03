@@ -9,6 +9,8 @@ import { useComments, useCreateCommets } from '../../queries/useComment';
 import { Comments } from '../../interfaces/comment/comment.interface';
 import ButtonValidateUI from '../../common/Button/ButtonValidateUI';
 import { BasicFrame } from '../../common/Frame/BasicFrame';
+import { useNotification } from '../../hooks/useNotification';
+import { containsSpecialCharacters } from '../../utils/filtered';
 
 interface DialogProps {
   open: boolean;
@@ -18,6 +20,7 @@ interface DialogProps {
 const GuideDialogComment: React.FC<DialogProps> = ({ open, onClose}) => {
   const {isLoading: loadComments, data: commets} = useComments();
   const {mutate, isLoading, reset, data} = useCreateCommets();
+  const {getError} = useNotification();
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
 
@@ -32,7 +35,9 @@ const GuideDialogComment: React.FC<DialogProps> = ({ open, onClose}) => {
 
   const handleSave = () => {
     const type_id = commets?.filter((item: Comments) => item.description === 'Other')[0];
-    if (validate && type_id) mutate({type_id: type_id?.id, title, description});
+    if (containsSpecialCharacters(title + description)) {
+        getError('Special characters are not allowed');
+    }else if (validate && type_id) mutate({type_id: type_id?.id, title, description});
   };
 
   

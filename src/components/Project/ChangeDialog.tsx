@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -22,10 +22,31 @@ interface ChangeDialogProps {
 
   const ChangeDialog: React.FC<ChangeDialogProps> = ({ open, onClose,  initialData, dataProj}) => {
     const [disabled, setDisabled] = useState<boolean>(false);
-    const {mutate, isLoading: loadingChange} = useChangeProject();
+    const {mutate, isLoading: loadingChange, data: change, reset} = useChangeProject();
     const [dialogData, setDialogData] = useState<string>('');
     const {isLoading, data, refetch} = useProjects();
-    const {getWarning} = useNotification();
+    const {getError} = useNotification();
+    const [status, setStatus] = useState(true);
+    
+    useEffect(() => {
+        function changeStatus() {
+        setStatus(navigator.onLine);
+        }
+        window.addEventListener("online", changeStatus);
+        window.addEventListener("offline", changeStatus);
+        return () => {
+        window.removeEventListener("online", changeStatus);
+        window.removeEventListener("offline", changeStatus);
+        };
+    }, []);
+      
+    useEffect(() => {
+        if (change) {
+            onClose();
+            reset();
+            setDialogData('');
+        }
+  }, [change, onClose, reset])
 
 
   const changeData = (n: string) => {
@@ -34,13 +55,14 @@ interface ChangeDialogProps {
   }  
 
   const handleSave = () => {
-    refetch();
-    setDialogData('');
-    const repo_origin = data?.find((p: Project) => p.title === initialData)?.id;
-    const repo_destiny = data?.find((p: Project) => p.title === dialogData)?.id;
-    getWarning('Processing request...');
-    mutate({repo_origin: repo_origin, repo_destiny: repo_destiny, project_id: dataProj.id});
-    onClose();
+    if(status) {
+        refetch();
+        const repo_origin = data?.find((p: Project) => p.title === initialData)?.id;
+        const repo_destiny = data?.find((p: Project) => p.title === dialogData)?.id;
+        mutate({repo_origin: repo_origin, repo_destiny: repo_destiny, project_id: dataProj.id});
+    }else{
+        getError('No internet connection');
+    }
   }
 
   return (

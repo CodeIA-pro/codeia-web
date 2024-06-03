@@ -17,7 +17,7 @@ import { useGenerateGuide } from "../../queries/useProject";
 const ReferenceGuideView: React.FC = () => {
     const params = useParams();
     const {isLoading: isLoadingGuide} = useGenerateGuide();
-    const {isLoading, data, dataUpdatedAt} = useGuideProject(params.project as string, params.owner as string);
+    const {isLoading, data, dataUpdatedAt, remove, refetch} = useGuideProject(params.project as string, params.owner as string);
     const [searchTerm, setSearchTerm] = useState('');
     const [generation, setGeneration] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
@@ -40,6 +40,11 @@ const ReferenceGuideView: React.FC = () => {
         console.log(data);
         setGeneration(true);
     };
+
+    const handleRefresh = () => {
+        remove(); 
+        refetch();
+    }
 
     const is_valid_url = (params.project as string !== undefined && params.owner as string !== undefined);
     const root = params.project as string + '/' + params.name as string; 
@@ -72,7 +77,7 @@ const ReferenceGuideView: React.FC = () => {
                             <GuideList projects={data?.assets} name={searchTerm} guide={data}/>
                         </GenericPaper>
                     </GenericPaper>
-                    <GuideInfo projects={data} updatedAt={dataUpdatedAt} loading={generation}/>
+                    <GuideInfo projects={data} updatedAt={dataUpdatedAt} loading={generation} update={handleRefresh}/>
                 </BasicFrame>
             </BasicFrame>
             </GenericFrame>

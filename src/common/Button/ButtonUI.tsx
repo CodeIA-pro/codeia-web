@@ -6,9 +6,10 @@ interface ButtonUIProps {
     onClick?: () => void;
     className?: string;
     style?: React.CSSProperties;
+    size?: number;
 }
 
-const ButtonUI: React.FC<ButtonUIProps> = ({text, isLoading, onClick, className, style}) => {
+const ButtonUI: React.FC<ButtonUIProps> = ({text, isLoading, onClick, className, style, size=24}) => {
 
     return(
         <Button
@@ -23,7 +24,7 @@ const ButtonUI: React.FC<ButtonUIProps> = ({text, isLoading, onClick, className,
             <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {isLoading && (
                     <CircularProgress 
-                        size={24} 
+                        size={size} 
                         sx={{ color: 'white', position: 'absolute' }}
                     />
                 )}

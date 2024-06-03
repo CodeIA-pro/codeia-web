@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -11,7 +11,6 @@ import { replaceSpaces } from '../../utils/filtered';
 import { useUpdateProject, useVerifyNameProject } from '../../queries/useProject';
 import { Verify } from '../../interfaces/common/verify.interface';
 import { BasicFrame } from '../../common/Frame/BasicFrame';
-import { useNotification } from '../../hooks/useNotification';
 
 interface DialogProps {
   initialData: CreateProject;
@@ -20,14 +19,29 @@ interface DialogProps {
 }
 
 const EditProjectDialog: React.FC<DialogProps> = ({ initialData, open, onClose }) => {
-  const {isLoading , data: response = {} as Verify, mutate} = useVerifyNameProject();
+  const {isLoading , data: response = {} as Verify, mutate, reset: resetVerify} = useVerifyNameProject();
   const [name, setName] = useState<string>('');
-  const { isLoading: loadingProject, mutate: update } = useUpdateProject(initialData.title);
-  const {getWarning} = useNotification();
+  const { isLoading: loadingProject, mutate: update, data: responseUpdate, reset: resetUpdate } = useUpdateProject(initialData.title);
   const [debounceTimeout, setDebounceTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
   const {register, handleSubmit, formState: { errors }, reset } = useForm<CreateProject>({
     defaultValues: initialData,
   });
+
+  useEffect(() => {
+    if (responseUpdate) {
+      onClose(); 
+      resetUpdate();
+      setName('')
+    }
+  }, [responseUpdate, onClose, resetUpdate, ])
+
+  useEffect(() => {
+    if (open) {
+      resetVerify();
+      reset({title: initialData.title, description: initialData.description});
+      setName('')
+    }
+  }, [open, resetVerify, reset, initialData])
 
   const debouncedSearch = (name: string) => {
     if (debounceTimeout) {
@@ -36,6 +50,7 @@ const EditProjectDialog: React.FC<DialogProps> = ({ initialData, open, onClose }
     setDebounceTimeout(
       setTimeout(() => {
         setName(name);
+        if (name === '') return;
         mutate(name)
       }, 500)
     );
@@ -51,11 +66,9 @@ const EditProjectDialog: React.FC<DialogProps> = ({ initialData, open, onClose }
     if (!loadingProject) {
       info.id = initialData.id;
       update(info);
-      getWarning('Processing request...');
-      closeDialog();
     }
   }
-
+  
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
         <BasicFrame isCentered={false} className='w-full p-5 flex-col'>
@@ -101,7 +114,7 @@ const EditProjectDialog: React.FC<DialogProps> = ({ initialData, open, onClose }
                         multiline // Habilita el comportamiento de área de texto
                         rows={3}  // Define el número de filas visibles
                         autoComplete="description"
-                        {...register("description", {})}
+                        {...register("description", {required: "Description is required"})}
                         error={!!errors.description}
                         helperText={errors.description?.message}
                     />
@@ -112,6 +125,13 @@ const EditProjectDialog: React.FC<DialogProps> = ({ initialData, open, onClose }
                     <Button onClick={closeDialog} style={{fontSize: '0.8em', borderRadius: '0.7em', width: '90px', textTransform: 'none', backgroundColor:'#222f4e', color:'#fff' }}>Cancelar</Button>
                     <Button 
                       onClick={handleSubmit(handleSave)}
+                      disabled={ loadingProject || !response || response?.status && !isLoading || isLoading }
+                      sx={{
+                        opacity: (loadingProject || !response || response?.status && !isLoading || isLoading) ? 0.5 : 1, // Reduce la opacidad cuando no está seleccionado
+                        '&:disabled': {
+                        backgroundColor: 'grey', // Cambia el color de fondo cuando está deshabilitado
+                        },
+                    }}
                       style={{marginLeft:'0.5em', fontSize: '0.8em',  borderRadius: '0.7em', width: '90px', textTransform: 'none', color:'#fff', backgroundColor: '#5a7fe7', }}>
                       <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         {loadingProject && (

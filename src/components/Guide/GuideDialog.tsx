@@ -16,6 +16,7 @@ import { Sections } from '../../utils/section.utils';
 import { arrayToString } from '../../utils/filtered';
 import { GenerateGuideContext } from '../../context/GenerateGuide';
 import { useAuthStore } from '../../store';
+import { useNotification } from '../../hooks/useNotification';
 
 interface DialogProps {
   open: boolean;
@@ -28,6 +29,7 @@ const GuideDialog: React.FC<DialogProps> = ({ open, onClose, onSave,  initialDat
   const [lang, setLang] = useState<string>('English');
   const [value, setValue] = React.useState('Classic');
   const { user } = useAuthStore();
+  const {getError} = useNotification();
   const [selectedOptions, setSelectedOptions] = useState<string[]>(Sections);
   const {mutate} = React.useContext(GenerateGuideContext);
 
@@ -58,6 +60,10 @@ const GuideDialog: React.FC<DialogProps> = ({ open, onClose, onSave,  initialDat
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
+  };
+
+  const handleReview = () => {
+    getError("You must select at least one section");
   };
 
   return (
@@ -143,16 +149,8 @@ const GuideDialog: React.FC<DialogProps> = ({ open, onClose, onSave,  initialDat
             <DialogActions style={{paddingInlineEnd: '1.5em', paddingBlockEnd:'0.7rem'}}>
                 <Button onClick={onClose} style={{fontSize: '0.8em',  borderRadius: '0.7em', width: '82px', textTransform: 'none', backgroundColor:'#222f4e', color:'#fff' }}>Cancelar</Button>
                 <Button
-                disabled={ selectedOptions.length === 0 }
                 variant="contained"
-                onClick={()=> {handleSave()}}
-
-                sx={{
-                    opacity: (selectedOptions.length === 0) ? 0.5 : 1, // Reduce la opacidad cuando no está seleccionado
-                    '&:disabled': {
-                    backgroundColor: 'grey', // Cambia el color de fondo cuando está deshabilitado
-                    },
-                }}
+                onClick={()=> { selectedOptions.length === 0 ? handleReview() : handleSave() } }
                 style={{marginLeft:'0.5em', fontSize: '0.8em',  borderRadius: '0.7em', width: '82px', textTransform: 'none', color:'#fff', backgroundColor: '#5a7fe7', }}>
                     <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         {(false) && (
@@ -161,7 +159,6 @@ const GuideDialog: React.FC<DialogProps> = ({ open, onClose, onSave,  initialDat
                                 sx={{ color: 'white', position: 'absolute' }}
                             />
                         )}
-                        {/* (false) ? 'hidden' :  */}
                         <span style={{ visibility: 'visible' }}>Generate</span>
                     </Box>
                 </Button>

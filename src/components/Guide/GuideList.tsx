@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Filtered } from "../../utils/filtered";
 import { BasicFrame } from "../../common/Frame/BasicFrame";
 import { Box, Button, Container, List, ListItem, ListItemIcon, Typography } from "@mui/material";
@@ -9,6 +9,9 @@ import GuideCompilationDialog from './GuideCompilationDialog';
 import { useNavigate } from 'react-router-dom';
 import GuideSharedDialog from './GuideSharedDialog';
 import LinkIcon from '@mui/icons-material/Link';
+import { useDownloadPDF } from '../../queries/useGuide';
+import ButtonUI from '../../common/Button/ButtonUI';
+import { useNotification } from '../../hooks/useNotification';
 
 interface GuideListProps {
   guide : Guide;
@@ -20,14 +23,28 @@ const GuideList: React.FC<GuideListProps> = ({guide, projects, name='' }) => {
   const filtered = Filtered(projects, 'version', name);
   const navigate = useNavigate();
   const [openDialog, setOpenDialog] = useState(false);
+  const {mutate:PDF} = useDownloadPDF();
+  const {getSuccess, getError} = useNotification();
   const [openSharedDialog, setOpenSharedDialog] = useState(false);
-
+  const [loadingProjects, setLoadingProjects] = useState<{ [key: string]: boolean }>({});
   const [project, setProject] = useState<Asset | undefined>(undefined);
   const [version, setVersion] = useState<string>('');
+  const [status, setStatus] = useState(true);
+    
+  useEffect(() => {
+      function changeStatus() {
+      setStatus(navigator.onLine);
+      }
+      window.addEventListener("online", changeStatus);
+      window.addEventListener("offline", changeStatus);
+      return () => {
+      window.removeEventListener("online", changeStatus);
+      window.removeEventListener("offline", changeStatus);
+      };
+  }, []);
 
   const handleOpen = () => setOpenDialog(true);
   const handleClose = () => setOpenDialog(false);
-
   const handleSharedOpen = () => setOpenSharedDialog(true);
   const handleSharedClose = () => setOpenSharedDialog(false);
 
@@ -40,6 +57,27 @@ const GuideList: React.FC<GuideListProps> = ({guide, projects, name='' }) => {
     setVersion(version);
     handleSharedOpen();
  }
+
+ const handleDownload = (project: Asset) => {
+    if(status){
+        setLoadingProjects((prev) => ({ ...prev, [project.id]: true }));
+        PDF(
+          { project_id: project.project_id, asset_id: project.id, title: project.titulo+'-'+project.version+'v' },
+          {
+            onSuccess: () => {
+              setLoadingProjects((prev) => ({ ...prev, [project.id]: false }));
+              getSuccess('Downloaded successfully');
+            },
+            onError: () => {
+              setLoadingProjects((prev) => ({ ...prev, [project.id]: false }));
+              getError('Error downloading');
+            },
+          }
+        );
+    }else {
+        getError('No internet connection');
+    }
+  };
  
   return (
     <Fragment>
@@ -73,9 +111,7 @@ const GuideList: React.FC<GuideListProps> = ({guide, projects, name='' }) => {
                 <Button variant="contained" onClick={ ()=> handleNavigate(project.version)} style={{fontSize: '0.7em',  borderRadius: '0.7em', textTransform: 'none', backgroundColor:'#1e2f50',  }}>
                         View
                 </Button>
-                <Button variant="contained" style={{fontSize: '0.7em',  borderRadius: '0.7em', textTransform: 'none', backgroundColor:'#1e2f50', marginLeft:'0.9em'  }}>
-                        Donwload
-                </Button>
+                <ButtonUI text='Donwload' size={16} isLoading={loadingProjects[project.id] || false} onClick={ () => { handleDownload(project) }} style={{fontSize: '0.7em',  borderRadius: '0.7em', textTransform: 'none', backgroundColor:'#1e2f50'}} className='m-0 ml-2'/>
             </BasicFrame>
             ) : 
             (

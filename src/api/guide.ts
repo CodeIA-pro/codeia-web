@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Asset, Guide, Privacy, PrivacyResponse, Star } from "../interfaces/guide/guide.interface";
+import { Asset, Guide, Privacy, PrivacyResponse, Star, PDF } from '../interfaces/guide/guide.interface';
 import { API_URL } from "../services";
 import { getAuthorizationHeaders } from "../utils/authorization";
 import { Verify } from "../interfaces/common/verify.interface";
@@ -46,3 +46,32 @@ export const guideVersionProject = async (version: string, project: string, repo
     const response = await axios.post(API_URL + 'asset/star/', data , { headers });
     return response.data;
   }
+
+  export const downloadPDF = async (data: PDF): Promise<void> => {
+    const headers = getAuthorizationHeaders();
+    const { title, ...newObj } = data;
+    console.log(title);
+    const response = await axios.post(API_URL + 'asset/download/', newObj  ,{ 
+      headers,
+      responseType: 'blob'
+    });
+    // Verificar y extraer el nombre del archivo del encabezado Content-Disposition
+    const contentDisposition = response.headers['content-disposition'];
+    let filename = `${data.title}.pdf`; // Nombre de archivo por defecto en caso de que no se encuentre el encabezado
+
+    if (contentDisposition) {
+      const dispositionMatch = contentDisposition.match(/filename="(.+)"/);
+      if (dispositionMatch.length > 1) {
+        filename = dispositionMatch[1];
+      }
+    }
+
+    // Crear una URL para el blob recibido
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', filename); // Nombre del archivo para descargar
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };

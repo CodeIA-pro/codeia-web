@@ -75,13 +75,10 @@ export const NavBar: React.FC = () => {
                                 ? <>
                                     <Grid item className='hidden md:flex justify-center items-center'>
                                         <Typography onClick={() => navigate('/')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Home </Typography>
-                                        { !user ?
                                             <Fragment>
                                                 <Typography onClick={() => navigate('/#feature')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Features </Typography>
                                                 <Typography onClick={() => navigate('/pricing/#plans')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Plans </Typography>
                                             </Fragment>
-                                            : <div></div>
-                                        }
                                         {user != null ? (<Typography onClick={() => navigate('/projects')} fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Projects </Typography>) : (<div></div>)}
                                     </Grid>
                                     <Grid item className='hidden md:flex'>
@@ -156,13 +153,11 @@ export const NavBar: React.FC = () => {
                                         items-center fixed top-12 left-0 w-screen p-0 md:hidden'>
                                         <Grid item className='flex flex-col gap-2'>
                                             <Typography onClick={() => navigate('/')} textAlign="center" fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Home </Typography>
-                                            { !user ?
+  
                                                 <Fragment>
                                                     <Typography onClick={() => navigate('/#feature')} textAlign="center" fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Features </Typography>
                                                     <Typography onClick={() => navigate('/pricing/#plans')} textAlign="center" fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Plans </Typography>
                                                 </Fragment>
-                                                : <div></div>
-                                            }
                                             {user != null ? (<Typography onClick={() => navigate('/projects')} textAlign="center" fontSize="1em" fontWeight="300" style={{cursor: 'pointer', padding:'0em 2em'}}> Projects </Typography>) : (<div></div>)}
                                         </Grid>
                                         <Grid>

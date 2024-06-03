@@ -9,6 +9,8 @@ import { useComments, useCreateCommets } from '../../queries/useComment';
 import { Comments } from '../../interfaces/comment/comment.interface';
 import ButtonValidateUI from '../../common/Button/ButtonValidateUI';
 import { BasicFrame } from '../../common/Frame/BasicFrame';
+import { containsSpecialCharacters } from '../../utils/filtered';
+import { useNotification } from '../../hooks/useNotification';
 
 interface DialogProps {
   open: boolean;
@@ -18,6 +20,7 @@ interface DialogProps {
 const GuideDialogSuggestion: React.FC<DialogProps> = ({ open, onClose}) => {
   const {isLoading: loadComments, data: commets} = useComments();
   const {mutate, isLoading, reset, data} = useCreateCommets();
+  const {getError} = useNotification();
   const [text, setText] = useState<number>(0);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -33,11 +36,10 @@ const GuideDialogSuggestion: React.FC<DialogProps> = ({ open, onClose}) => {
   const validate = title !== '' && text !== 0 && description !== '';
 
   const handleSave = () => {
-    if (validate) mutate({type_id: text, title, description});
+    if (containsSpecialCharacters(title + description)) {
+        getError('Special characters are not allowed');
+    }else if (validate) mutate({type_id: text, title, description});
   };
-
-  
-
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
         <div style={{padding:'1em',}}>

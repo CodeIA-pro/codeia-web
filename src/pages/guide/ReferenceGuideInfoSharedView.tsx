@@ -55,7 +55,7 @@ const ReferenceGuideInfoSharedView: React.FC = () => {
                         <KeyboardDoubleArrowRightIcon onClick={toggleBurger} className='relative text-white top-0 w-16'/>
                     </div>
                 }
-                <BasicFrame className='markdown-container pl-32 md:px-16 md:py-16' style={{ boxSizing: "border-box", margin:0, overflowY:'auto', width: '100%'}}>
+                <BasicFrame className={`markdown-container pl-32 md:px-16 md:py-16 ${data.theme == "Dark" ? 'bg-dark-codeia text-slate-100' : ''}`} style={{ boxSizing: "border-box", margin:0, overflowY:'auto', width: '100%'}}>
                     <Markdown markdownText={searchTerm}/>
                 </BasicFrame>
             </BasicFrame>

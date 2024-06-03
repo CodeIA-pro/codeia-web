@@ -7,6 +7,11 @@ export function replaceSpaces(frase: string): string {
   return frase.trim().replace(/\s+/g, '-');
 }
 
+export function containsSpecialCharacters(str: string): boolean {
+  const specialCharactersPattern = /[^a-zA-Z0-9]/;
+  return specialCharactersPattern.test(str);
+}
+
 export function arrayToString(array: string[], order: string[]): string {
   const orderedArray = array.sort((a, b) => {
     return order.indexOf(a) - order.indexOf(b);
