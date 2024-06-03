@@ -6,6 +6,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
 import { EditGuide } from '../../interfaces/guide/guide.interface';
 import { useEditMarkdown } from '../../queries/useGuide';
+import { validateMarkdown } from '../../utils/filtered';
+import { useNotification } from '../../hooks/useNotification';
 
 interface MarkdownProps {
   markdownText: EditGuide;
@@ -15,6 +17,7 @@ interface MarkdownProps {
 const MarkdownShare: React.FC<MarkdownProps> = ({ markdownText, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
   const {mutate} = useEditMarkdown();
+  const {getError} = useNotification();
   const [editableText, setEditableText] = useState(markdownText.markdownText || '');
 
   useEffect(() => {
@@ -29,7 +32,11 @@ const MarkdownShare: React.FC<MarkdownProps> = ({ markdownText, onUpdate }) => {
     setIsEditing(false);
     if (onUpdate) {
       if(markdownText.asset_id !== 0){
-        mutate({ markdownText: editableText, asset_id: markdownText.asset_id });
+        if(!validateMarkdown(editableText)){
+          mutate({ markdownText: editableText, asset_id: markdownText.asset_id });
+        }else{
+          getError('Invalid markdown syntax');
+        }
       }
       onUpdate({ markdownText: editableText, asset_id: markdownText.asset_id });
     }

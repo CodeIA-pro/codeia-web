@@ -56,14 +56,14 @@ export const useDownloadPDF = () => {
 
 
 export const useEditMarkdown = () => {
-  const {getSuccess, getWarning} = useNotification();
+  const {getSuccess, getError} = useNotification();
   return useMutation({
     mutationFn: editMarkdown,
     onSuccess: () => {
       getSuccess('Markdown updated');
     },
     onError: () => {
-      getWarning('Markdown not updated');
+      getError('Markdown not updated');
     },
   });
 };

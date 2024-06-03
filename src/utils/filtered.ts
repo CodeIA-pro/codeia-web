@@ -1,3 +1,5 @@
+import markdownlint from 'markdownlint';
+
 export function Filtered(Elemet: any, attribute: string, name: string) {
   if (name.trim() === '') return Elemet;
   return Elemet?.filter((x:any) => x[attribute]?.toLowerCase().includes(name.toLowerCase()));
@@ -83,3 +85,18 @@ export function timeSince(dateString: string): string {
     return `${Math.floor(diffInSeconds / 31536000)} years ago`;
   }
 }
+
+export const validateMarkdown = (markdownText: string): boolean => {
+  const options: markdownlint.Options = {
+    strings: {
+      content: markdownText
+    },
+    config: {
+      "default": true,
+      "MD013": false // Ejemplo de cómo desactivar una regla específica
+    }
+  };
+  const result = markdownlint.sync(options);
+  const hasErrors = result.content.length > 0;
+  return !hasErrors;
+};

@@ -11,9 +11,11 @@ import { useWindowSize } from '../../hooks/useWindowSize';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import MarkdownShare from '../../common/Markdown/MarkdownShare';
+import { EditGuide } from '../../interfaces/guide/guide.interface';
 const ReferenceGuideInfoSharedView: React.FC = () => {
     const params = useParams();
-    const [searchTerm, setSearchTerm] = useState(Welcome);
+    const guide: EditGuide = {markdownText: Welcome(), asset_id: 0};
+    const [searchTerm, setSearchTerm] = useState(guide);
     const { isLoading, data} = useGuideVersionURL(params.url as string);
     const { width } = useWindowSize();
     
@@ -30,7 +32,7 @@ const ReferenceGuideInfoSharedView: React.FC = () => {
           setBurgerActive(false);
         }
     }, [width]);
-    
+
     return (
         <Fragment>
             { isLoading ?
@@ -54,7 +56,7 @@ const ReferenceGuideInfoSharedView: React.FC = () => {
                     </div>
                 }
                 <BasicFrame className={`markdown-container pl-32 md:px-16 md:py-16 ${data.theme == "Dark" ? 'bg-dark-codeia text-slate-100' : ''}`} style={{ boxSizing: "border-box", margin:0, overflowY:'auto', width: '100%'}}>
-                    <MarkdownShare markdownText={searchTerm} />
+                    <MarkdownShare markdownText={searchTerm.markdownText} />
                 </BasicFrame>
             </BasicFrame>
             ):(<NotFound root={'Guide does not exist or does not have sufficient permissions'} />)}
