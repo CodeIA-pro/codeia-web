@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Asset, Guide, Privacy, PrivacyResponse, Star, PDF } from '../interfaces/guide/guide.interface';
+import { Asset, Guide, Privacy, PrivacyResponse, Star, PDF, EditGuide } from '../interfaces/guide/guide.interface';
 import { API_URL } from "../services";
 import { getAuthorizationHeaders } from "../utils/authorization";
 import { Verify } from "../interfaces/common/verify.interface";
@@ -38,6 +38,12 @@ export const guideVersionProject = async (version: string, project: string, repo
   export const updatePrivacy = async (data: Privacy): Promise<PrivacyResponse> => {
     const headers = getAuthorizationHeaders();
     const response = await axios.post(API_URL + 'asset/privacy/', data , { headers });
+    return response.data;
+  }
+
+  export const editMarkdown = async (data: EditGuide): Promise<Connect> => {
+    const headers = getAuthorizationHeaders();
+    const response = await axios.post(API_URL + 'asset/markdown/edit/', data , { headers });
     return response.data;
   }
 

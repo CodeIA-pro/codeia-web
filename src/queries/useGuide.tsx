@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { downloadPDF, getPrivacy, guideProject, guideURLProject, guideVersion, guideVersionProject, starGuide, updatePrivacy } from "../api/guide";
+import { downloadPDF, editMarkdown, getPrivacy, guideProject, guideURLProject, guideVersion, guideVersionProject, starGuide, updatePrivacy } from "../api/guide";
 import { sortArray } from "../utils/filtered";
 import { useNotification } from "../hooks/useNotification";
 import { Privacy, Star } from "../interfaces/guide/guide.interface";
@@ -51,7 +51,20 @@ export const useGuideVersionURL = (url: string,) => {
 export const useDownloadPDF = () => {
   return useMutation({
     mutationFn: downloadPDF,
+  });
+};
 
+
+export const useEditMarkdown = () => {
+  const {getSuccess, getWarning} = useNotification();
+  return useMutation({
+    mutationFn: editMarkdown,
+    onSuccess: () => {
+      getSuccess('Markdown updated');
+    },
+    onError: () => {
+      getWarning('Markdown not updated');
+    },
   });
 };
 

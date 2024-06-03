@@ -61,3 +61,8 @@ export interface Star {
     star: number;
     asset_id: number;
 }
+
+export interface EditGuide {
+    markdownText: string;
+    asset_id: number;
+}

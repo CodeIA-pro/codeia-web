@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Asset } from "../../interfaces/guide/guide.interface";
+import { Asset, EditGuide } from "../../interfaces/guide/guide.interface";
 import { BasicFrame } from '../../common/Frame/BasicFrame';
 import { Button, Container, List, ListItem, TextField, Typography } from '@mui/material';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
@@ -11,7 +11,7 @@ import { useStar } from '../../queries/useGuide';
 
 interface GuideNavbarProps {
     data: Asset;
-    guideText: (text: string) => void;
+    guideText: (data: EditGuide) => void;
   }
   
 const GuideNavbar: React.FC<GuideNavbarProps> = ({data, guideText}) => {
@@ -96,7 +96,7 @@ const GuideNavbar: React.FC<GuideNavbarProps> = ({data, guideText}) => {
                             <List>
                                 {filteredVersion?.map((items: Asset) => (
                                     <ListItem key={items.id} style={{ padding:'0.4em 0', fontSize: '0.9em', fontWeight:'300' }}>
-                                        <span style={{ cursor:'pointer',}} onClick={() => guideText(items?.description)}>
+                                        <span style={{ cursor:'pointer',}} onClick={() => guideText({markdownText: items.description, asset_id: items.id})}>
                                             {items?.titulo}
                                         </span>
                                     </ListItem>

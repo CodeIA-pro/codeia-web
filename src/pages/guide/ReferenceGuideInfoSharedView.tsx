@@ -6,13 +6,11 @@ import { BasicFrame } from '../../common/Frame/BasicFrame';
 import NotFound from '../../common/Not_found/NotFound';
 import GuideNavbar from '../../components/GuideInfo/GuideNavbar';
 import { useGuideVersionURL } from '../../queries/useGuide';
-import Markdown from '../../common/Markdown/Markdown';
 import { Welcome } from '../../utils/welcome.util';
-
 import { useWindowSize } from '../../hooks/useWindowSize';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
-
+import MarkdownShare from '../../common/Markdown/MarkdownShare';
 const ReferenceGuideInfoSharedView: React.FC = () => {
     const params = useParams();
     const [searchTerm, setSearchTerm] = useState(Welcome);
@@ -56,7 +54,7 @@ const ReferenceGuideInfoSharedView: React.FC = () => {
                     </div>
                 }
                 <BasicFrame className={`markdown-container pl-32 md:px-16 md:py-16 ${data.theme == "Dark" ? 'bg-dark-codeia text-slate-100' : ''}`} style={{ boxSizing: "border-box", margin:0, overflowY:'auto', width: '100%'}}>
-                    <Markdown markdownText={searchTerm}/>
+                    <MarkdownShare markdownText={searchTerm} />
                 </BasicFrame>
             </BasicFrame>
             ):(<NotFound root={'Guide does not exist or does not have sufficient permissions'} />)}
