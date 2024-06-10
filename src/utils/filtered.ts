@@ -10,7 +10,7 @@ export function replaceSpaces(frase: string): string {
 }
 
 export function containsSpecialCharacters(str: string): boolean {
-  const specialCharactersPattern = /[^a-zA-Z0-9]/;
+  const specialCharactersPattern = /[^a-zA-Z0-9 ]/;
   return specialCharactersPattern.test(str);
 }
 
